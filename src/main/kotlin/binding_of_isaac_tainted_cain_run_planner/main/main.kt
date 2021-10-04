@@ -279,8 +279,8 @@ fun searchRuns(){
     }
 
     val result = runManager.searchRuns(searchTerms)
-    for(item in result){
-        print(item.toString())
+    for(run in result){
+        print(run.formatRunString())
     }
 }
 
@@ -330,8 +330,8 @@ fun menu() : Int {
     println(" 6) List Runs")
     println(" 7) Remove Run")
     println(" 8) Update Run")
-    println(" 9) Search Items by Name")
-    println(" 10) Search Runs by Pickups")
+    println(" 9) Search Items")
+    println(" 10) Search Runs")
 //    println(" 11) Search Runs by Name")
 //    println(" 12) Search Runs by Name")
     println("-1) Exit")
