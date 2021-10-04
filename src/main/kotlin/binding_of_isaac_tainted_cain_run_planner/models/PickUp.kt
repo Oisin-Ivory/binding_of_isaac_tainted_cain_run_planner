@@ -6,19 +6,19 @@ data class PickUp(var pickUpName: String?, var pickUpIcon: String?, var location
     override fun toString(): String =
         "Name: "+this.pickUpName+"\nIcon: "+this.pickUpIcon+"\nLocations: "+this.locations.toString()
 
-    fun toJSONString():String{
-
-        return "    {\n        \"pickUpName\":\""+pickUpName+"\",\n        \"pickUpIcon\":\""+pickUpIcon+"\",\n        \"locations\":[\n"+formatLocationJson()+"        ]\n    },"
-    }
-    fun formatLocationJson():String{
-        var locationString = ""
-        for(loc in locations!!){
-            if(loc == locations!!.last()){
-                locationString += "            \"$loc\"\n"
-            }else {
-                locationString += "            \"$loc\",\n"
-            }
-        }
-        return locationString
-    }
+//    fun toJSONString():String{
+//
+//        return "    {\n        \"pickUpName\":\""+pickUpName+"\",\n        \"pickUpIcon\":\""+pickUpIcon+"\",\n        \"locations\":[\n"+formatLocationJson()+"        ]\n    },"
+//    }
+//    fun formatLocationJson():String{
+//        var locationString = ""
+//        for(loc in locations!!){
+//            if(loc == locations!!.last()){
+//                locationString += "            \"$loc\"\n"
+//            }else {
+//                locationString += "            \"$loc\",\n"
+//            }
+//        }
+//        return locationString
+//    }
 }

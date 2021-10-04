@@ -187,7 +187,7 @@ fun listRuns() {
 
     for(run in runManager.getRuns()){
         println("\n_________________________________________________________")
-        println(run.runName+"\n----------------------------------------\n" + run.formatRunItems()+"\n")
+        println(run.runName+"\n----------------------------------------\n" + run.formatRunItems())
         println("\n_________________________________________________________")
     }
 }

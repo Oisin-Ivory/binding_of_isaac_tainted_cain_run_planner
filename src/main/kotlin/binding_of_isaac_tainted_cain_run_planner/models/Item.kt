@@ -7,7 +7,7 @@ data class Item(var itemName: String?, var pickUps: Array<PickUp>?) {
         for(pickUp in this.pickUps!!){
             pickUpsString+="| ${pickUp.pickUpName} "
         }
-        return pickUpsString + "|\n"
+        return "$pickUpsString|\n"
     }
 
     override fun toString(): String {

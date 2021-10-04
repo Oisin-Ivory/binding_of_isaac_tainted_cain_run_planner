@@ -14,7 +14,7 @@ data class Run(var runName: String?, var runItems: ArrayList<Item>?) {
 
     fun formatRunString():String{
         var returnString : String = ""
-        returnString+= "--------------------------\n$runName\n"
+        returnString+= "--------------------------\n$runName\n_____\n"
         for(item in runItems!!){
             returnString += "${item.itemName}:\n" +
                     item.compactPickUpString()
