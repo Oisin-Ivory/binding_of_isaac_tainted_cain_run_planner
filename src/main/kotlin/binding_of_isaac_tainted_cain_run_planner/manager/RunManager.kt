@@ -1,6 +1,7 @@
 package binding_of_isaac_tainted_cain_run_planner.manager
 
 import binding_of_isaac_tainted_cain_run_planner.models.Item
+import binding_of_isaac_tainted_cain_run_planner.models.PickUp
 import binding_of_isaac_tainted_cain_run_planner.models.Run
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
@@ -48,8 +49,34 @@ class RunManager : Manager {
     }
 
     override fun load() {
-        val loadRuns = mapper.readValue<MutableList<Run>>(File("data/runs.json"))
+        val runFile = File("data/runs.json")
+        if(!runFile.exists()) {
+            runFile.createNewFile()
+            save()
+            return
+        }
+        val loadRuns = mapper.readValue<MutableList<Run>>(runFile)
+
         runs = loadRuns
+    }
+
+    fun removeItemsFromRuns(itemToRemove: Item) {
+        val runsToRemove : MutableList<Run> = emptyList<Run>().toMutableList()
+        for(run in runs){
+            for(item in run.runItems!!){
+                if (item == itemToRemove){
+                    run.runItems!!.remove(item)
+                    break
+                }
+            }
+            if(run.runItems!!.isEmpty()){
+                runsToRemove.add(run)
+            }
+        }
+
+        for(run in runsToRemove){
+            runs.remove(run)
+        }
     }
 
 }

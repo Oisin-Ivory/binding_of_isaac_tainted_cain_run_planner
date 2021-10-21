@@ -1,6 +1,7 @@
 package binding_of_isaac_tainted_cain_run_planner.manager
 
 import binding_of_isaac_tainted_cain_run_planner.models.Item
+import binding_of_isaac_tainted_cain_run_planner.models.Run
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import java.io.File
@@ -47,7 +48,14 @@ class ItemManager : Manager {
     }
 
     override fun load() {
-        val loadItems = mapper.readValue<MutableList<Item>>(File("data/items.json"))
+        val itemsFile = File("data/items.json")
+        if(!itemsFile.exists()) {
+
+            save()
+            return
+        }
+        val loadItems = mapper.readValue<MutableList<Item>>(itemsFile)
+
         items = loadItems
     }
 
