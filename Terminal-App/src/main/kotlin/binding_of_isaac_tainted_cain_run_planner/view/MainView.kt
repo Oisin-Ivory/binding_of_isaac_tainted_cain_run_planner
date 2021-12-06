@@ -35,7 +35,13 @@ class MainView{
         println("Input items requirements: ")
         println(listPickUps())
         for(i in 0 .. 7){
-            inputString = readLine()
+            var badInput = true
+            while (badInput){
+                inputString = readLine()
+                if (inputString != null && inputString.toInt()>0 && inputString.toInt()<pickUpManager.getPickUps().size) {
+                    badInput = false
+                }
+            }
             if (inputString != null) {
                 itemToBeAddedPickUps[i] = pickUpManager.getPickUp(inputString.toInt()-1)
             }
@@ -53,8 +59,25 @@ class MainView{
 
     fun removeItem(){
         displayItemsWithIndex()
-        itemManager.removeItem(takeInput("Input item to remove index: "))
+        var goodInput = false
+        var itemToRemoveIndex = -1
+        while(!goodInput){
+
+            itemToRemoveIndex = takeInput("Input Run to remove index, -1 to exit:")
+            if(itemToRemoveIndex ==-1){
+                return
+            }
+            if(itemToRemoveIndex >= itemManager.getItems().size || itemToRemoveIndex < 0){
+                continue
+            }
+            goodInput = true
+        }
+
+
+        runManager.removeItemsFromRuns(itemManager.getItem(itemToRemoveIndex))
+        itemManager.removeItem(itemToRemoveIndex)
         itemManager.save()
+        runManager.save()
     }
 
     fun displayItemsWithIndex(){
@@ -70,6 +93,9 @@ class MainView{
         var optionInput : Int
         while(!goodInput) {
             itemIndex = takeInput("Input item to update index: ")
+            if(itemIndex >= itemManager.getItems().size || itemIndex < 0){
+                continue
+            }
             println("Is the item you want to update ${itemManager.getItem(itemIndex).itemName}?\n Yes : 1 | No : 0 | Return : -1")
             optionInput = takeInput("")
             if (optionInput == 1)goodInput = true
@@ -126,7 +152,11 @@ class MainView{
                 -1 -> println("Creating Run")
                 else -> {
                     //getItemIndex
-                    runToBeAddedItems.add(itemManager.getItem(runInput))
+                    if(runInput >= itemManager.getItems().size || runInput < 0){
+                        continue
+                    }else {
+                        runToBeAddedItems.add(itemManager.getItem(runInput))
+                    }
                 }
             }
             println()
@@ -147,7 +177,19 @@ class MainView{
 
     fun removeRun(){
         displayRunsWithIndex()
-        runManager.removeRun(takeInput("Input Run to remove index: "))
+        var goodInput = false
+        var input = 0
+        while(!goodInput){
+            input = takeInput("Input Run to remove index -1 to exit: ")
+            if(input ==-1){
+                return
+            }
+            if(input >= runManager.getRuns().size || input < 0){
+                continue
+            }
+            goodInput = true
+        }
+        runManager.removeRun(input)
         runManager.save()
     }
 
@@ -165,6 +207,9 @@ class MainView{
         var optionInput : Int
         while(!goodInput) {
             runIndex = takeInput("Input run index to update item: ")
+            if(runIndex >= runManager.getRuns().size || runIndex < 0){
+                continue
+            }
             println("Is the run you want to update ${runManager.getRun(runIndex).runName}?\n Yes : 1 | No : 0 | Return : -1")
             optionInput = takeInput("")
             if (optionInput == 1)goodInput = true
@@ -187,13 +232,20 @@ class MainView{
             } else if (optionInput == 1) {
                 var inputValue = 0
                 displayItemsWithIndex()
+
                 inputValue = takeInput("Input item index: ")
+                if(inputValue >= itemManager.getItems().size || inputValue < 0){
+                    continue
+                }
                 runManager.getRun(runIndex).addItem(itemManager.getItem(inputValue));
                 goodInput = true
             }else if (optionInput == 2) {
                 var inputValue = 0
                 print(runManager.getRun(runIndex).listRunItemsWithIndex())
                 inputValue = takeInput("Input item index: ")
+                if(inputValue >= runManager.getRun(runIndex).runItems!!.size || inputValue < 0){
+                    continue
+                }
                 runManager.getRun(runIndex).removeItem(inputValue)
                 goodInput = true
             }
@@ -240,33 +292,15 @@ class MainView{
 
 
     fun listPickUps():String{
-        return  "\n1) Read Heart" +
-                "\n2) Soul Heart" +
-                "\n3) Black Heart" +
-                "\n4) Eternal Heart" +
-                "\n5) Gold Heart" +
-                "\n6) Bone Heart" +
-                "\n7) Rotten Heart" +
-                "\n8) Penny" +
-                "\n9) Nickle" +
-                "\n10) Dime" +
-                "\n11) Lucky Penny" +
-                "\n12) Key" +
-                "\n13) Gold Key" +
-                "\n14) Charged Key" +
-                "\n15) Bomb" +
-                "\n16) Golden Bomb" +
-                "\n17) Giga Bomb" +
-                "\n18) Micro Battery" +
-                "\n19) Lil' Battery" +
-                "\n20) Mega Battery" +
-                "\n21) Card" +
-                "\n22) Pill" +
-                "\n23) Rune/Soul" +
-                "\n24) Dice Shard" +
-                "\n25) Cracked Key"
+
+        var returnString = ""
+
+        for(i in 1..pickUpManager.getPickUps().size){
+            returnString = returnString+"\n${i}) ${pickUpManager.getPickUp(i-1).pickUpName}"
 
 
+        }
+        return  returnString
     }
 
     fun menu() : Int {
@@ -295,6 +329,7 @@ class MainView{
             input.toInt()
         else
             -9
+        //print(runManager.getRuns().toString())
         return option
     }
 
