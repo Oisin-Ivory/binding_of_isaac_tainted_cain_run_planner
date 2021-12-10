@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">BOITCRP</string>
+    <string name="app_name">BOI: Tainted Cain Run Planner</string>
+    <string name="btn_items">Items</string>
+    <string name="btn_runs">Runs</string>
+    <string name="title_text">Binding of Isaac\nTainted Cain Run Planner</string>
 </resources>
