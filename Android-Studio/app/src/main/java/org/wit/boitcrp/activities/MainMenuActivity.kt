@@ -13,11 +13,28 @@ class MainMenuActivity: AppCompatActivity() {
     private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        print("Created Main activity")
         super.onCreate(savedInstanceState)
         binding = MainMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
         app = application as MainApp
+        binding.btnItems.setOnClickListener(){
+            launchItemList()
+        }
+        binding.btnRuns.setOnClickListener(){
+            launchRunList()
+        }
+    }
 
 
+
+    private fun launchItemList(){
+        val intent = Intent(this, ItemsListActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun launchRunList(){
+        val intent = Intent(this, RunListActivity::class.java)
+        startActivity(intent)
     }
 }

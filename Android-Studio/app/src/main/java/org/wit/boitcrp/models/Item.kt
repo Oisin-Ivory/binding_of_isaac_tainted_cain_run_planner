@@ -1,17 +1,13 @@
 package org.wit.boitcrp.models
 
-data class Item(var itemName: String?, var pickUps: Array<PickUp>?) {
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-    fun compactPickUpString():String{
-        var pickUpsString = ""
-        for(pickUp in this.pickUps!!){
-            pickUpsString+="| ${pickUp.pickUpName} "
-        }
-        return "$pickUpsString|\n"
-    }
+@Parcelize
+data class Item(var itemName: String = "",
+                var id: Long = 0,
+                var pickUps: Array<PickUp>? = arrayOf(PickUp(),PickUp(),PickUp(),PickUp(),PickUp(),PickUp(),PickUp(),PickUp())
+) : Parcelable {
 
-    override fun toString(): String {
-        return "Name: " + this.itemName + "\nItems: " + compactPickUpString()
-    }
 
 }

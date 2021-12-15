@@ -1,47 +1,25 @@
 package org.wit.boitcrp.models
 
-data class Run(var runName: String?, var runItems: ArrayList<Item>?) {
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-    fun formatRunItems():String{
-        var returnString : String = ""
-        for(item in runItems!!){
-            returnString += "${item.itemName}:\n" +
-                    item.compactPickUpString()
-        }
 
-        return returnString
-    }
+@Parcelize
+data class Run(var runName: String?,
+               var id: Long?,
+               var runItems: ArrayList<Item>?) : Parcelable {
 
-    fun formatRunString():String{
-        var returnString : String = ""
-        returnString+= "--------------------------\n$runName\n_____\n"
-        for(item in runItems!!){
-            returnString += "${item.itemName}:\n" +
-                    item.compactPickUpString()
-        }
-
-        return returnString
-    }
 
     fun addItem(item: Item){
         runItems?.add(item)
     }
 
-    fun removeItem(index: Int){
-        runItems?.removeAt(index)
-    }
-
-    fun listRunItemsWithIndex(): String{
-        var index = 0
-        var returnString = ""
-        for(i in runItems!!){
-            returnString +=("$index) ${runItems!!.get(index).itemName}\n")
-            index++
+    fun removeItem(id: Long){
+        val foundItem: Item? = runItems?.find { p -> p.id == id }
+        if (foundItem != null) {
+            runItems?.remove(foundItem)
         }
 
-        return returnString
     }
-    override fun toString(): String =
-        "Name: "+this.runName+"\nItems: "+this.runItems.toString()
 
 }

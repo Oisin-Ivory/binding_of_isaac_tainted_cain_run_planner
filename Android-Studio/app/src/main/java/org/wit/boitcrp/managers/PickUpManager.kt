@@ -1,17 +1,30 @@
 package org.wit.boitcrp.managers
+
+import android.content.Context
+import com.google.gson.reflect.TypeToken
 import org.wit.boitcrp.models.PickUp
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.fasterxml.jackson.module.kotlin.readValue
-import org.wit.boitcrp.managers.Manager
-import java.io.File
-import java.nio.file.Paths
+import org.wit.placemark.helpers.exists
+import org.wit.placemark.helpers.gsonBuilder
+import org.wit.placemark.helpers.read
+import org.wit.placemark.helpers.write
+import java.lang.reflect.Type
 
-class PickUpManager : Manager {
 
-    val mapper = jacksonObjectMapper()
-    private var pickUps : Array<PickUp> = emptyArray<PickUp>()
+class PickUpManager(private val context: Context) {
 
-    fun getPickUps(): Array<PickUp> {
+    private var pickUps : MutableList<PickUp> = emptyList<PickUp>().toMutableList()
+    val JSON_FILE = "pickups.json"
+    val listType: Type = object : TypeToken<ArrayList<PickUp>>() {}.type
+
+    init {
+        if (exists(context, JSON_FILE)) {
+            deserialize()
+        }else{
+            initPickups()
+            serialize()
+        }
+    }
+    fun getPickUps(): List<PickUp> {
         return pickUps
     }
 
@@ -19,27 +32,52 @@ class PickUpManager : Manager {
         return pickUps[index]
     }
 
-    override fun save() {
-        mapper.writeValue(Paths.get("data/pickups.json").toFile(), pickUps);
+    private fun serialize() {
+        val jsonString = gsonBuilder.toJson(pickUps, listType)
+        write(context, JSON_FILE, jsonString)
     }
 
-    override fun load() {
+    private fun deserialize() {
+        val jsonString = read(context, JSON_FILE)
+        pickUps = gsonBuilder.fromJson(jsonString, listType)
+    }
 
-        val pickUpsFile = File("data/pickups.json")
-        if(!pickUpsFile.exists()) {
-            pickUpsFile.createNewFile()
-            initPickups()
-            save()
-            return
+    fun findAll(): List<PickUp> {
+        return pickUps
+    }
+
+    fun findAllNames(): List<String>{
+        val nameArr: ArrayList<String> = ArrayList()
+        for(pickup in pickUps){
+            pickup.pickUpName?.let { nameArr.add(it) }
         }
-        val loadPickUps = mapper.readValue<Array<PickUp>>(pickUpsFile)
+        return nameArr
+    }
 
-        pickUps = loadPickUps
+    fun findPickupName(name:String): PickUp? {
+        for (pickup in pickUps){
+            if (pickup.pickUpName == name){
+                return pickup
+            }
+        }
+        return null
+    }
+
+    fun getPickUpIndex(pickUp: PickUp): Int{
+        for(i in 0 .. pickUps.size){
+            if(pickUps[i] == pickUp){
+                return i
+            }
+        }
+        return -1
     }
 
     fun initPickups() {
         //Initialize default pickups
-        var locationList = listOf("Room Completion", "Champions", "Chests", "Secret Rooms", "Curse Rooms")
+        var locationList = listOf<String>()
+        val empty = PickUp("Empty", "empty.png", locationList)
+
+        locationList = listOf("Room Completion", "Champions", "Chests", "Secret Rooms", "Curse Rooms")
         val redHeart = PickUp("Red Heart", "redheart.png", locationList)
 
         locationList = listOf("Tinted Rocks", "Room Completion", "The Hierophant", "Boss Drop", "Red Chest")
@@ -108,7 +146,24 @@ class PickUpManager : Manager {
         locationList = listOf("Secret Rooms", "Shop", "Room Completion")
         val crackedKey = PickUp("Cracked Key", "crackedkey.png", locationList)
 
-        val items = arrayOf(
+        locationList = listOf("Secret Rooms", "Shop", "Room Completion","Chests")
+        val goldenPenny = PickUp("Golden Penny", "goldenpenny.png", locationList)
+
+        locationList = listOf("Secret Rooms", "Shop", "Room Completion")
+        val goldenPill = PickUp("Golden Pill", "goldenpill.png", locationList)
+
+        locationList = listOf("Secret Rooms")
+        val goldenBattery = PickUp("Golden Battery", "goldenbattery.png", locationList)
+
+        locationList = listOf("Tainted Blue Baby")
+        val poopNugget = PickUp("Golden Battery", "poopnugget.png", locationList)
+
+        locationList = listOf("Unknown")
+        val unknown = PickUp("Unknown", "unknown.png", locationList)
+
+
+        val items = listOf(
+                empty,
                 redHeart,
                 soulHeart,
                 blackHeart,
@@ -133,9 +188,14 @@ class PickUpManager : Manager {
                 pill,
                 runeSoul,
                 diceShard,
-                crackedKey
+                crackedKey,
+                goldenPenny,
+                goldenPill,
+                goldenBattery,
+                poopNugget,
+                unknown
         )
-        pickUps = items
+        pickUps = items as MutableList<PickUp>
     }
 }
 

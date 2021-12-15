@@ -1,31 +1,43 @@
 package org.wit.boitcrp.managers
 
+import android.content.Context
+import com.google.gson.reflect.TypeToken
 import org.wit.boitcrp.models.Item
 import org.wit.boitcrp.models.Run
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.fasterxml.jackson.module.kotlin.readValue
+import org.wit.placemark.helpers.*
 import java.io.File
+import java.lang.reflect.Type
 import java.nio.file.Paths
 
-class RunManager : Manager {
+class RunManager(private val context: Context){
     private var runs : MutableList<Run> = emptyList<Run>().toMutableList()
-    val mapper = jacksonObjectMapper()
+    val JSON_FILE = "runs.json"
+    val listType: Type = object : TypeToken<ArrayList<Run>>() {}.type
 
-    fun getRuns(): MutableList<Run> {
-        return runs;
-    }
-    fun getRun(index : Int): Run {
-        return runs[index]
+    init {
+        if (exists(context, JSON_FILE)) {
+            deserialize()
+        }
     }
 
-    fun setRun(index : Int): Run {
-        return runs[index]
+    private fun serialize() {
+        val jsonString = gsonBuilder.toJson(runs, listType)
+        write(context, JSON_FILE, jsonString)
     }
-    fun removeRun(index : Int){
-        runs.removeAt(index)
+
+    private fun deserialize() {
+        val jsonString = read(context, JSON_FILE)
+        runs = gsonBuilder.fromJson(jsonString, listType)
     }
-    fun add(run : Run){
+
+    fun findAll(): List<Run> {
+        return runs
+    }
+
+    fun create(run: Run) {
+        run.id = generateRandomId()
         runs.add(run)
+        serialize()
     }
 
     fun searchRuns(searchTerms : List<String>):List<Run>{
@@ -43,39 +55,5 @@ class RunManager : Manager {
         return returnList
     }
 
-    override fun save() {
-        mapper.writeValue(Paths.get("data/runs.json").toFile(), runs);
-    }
-
-    override fun load() {
-        val runFile = File("data/runs.json")
-        if(!runFile.exists()) {
-            runFile.createNewFile()
-            save()
-            return
-        }
-        val loadRuns = mapper.readValue<MutableList<Run>>(runFile)
-
-        runs = loadRuns
-    }
-
-    fun removeItemsFromRuns(itemToRemove: Item) {
-        val runsToRemove : MutableList<Run> = emptyList<Run>().toMutableList()
-        for(run in runs){
-            for(item in run.runItems!!){
-                if (item == itemToRemove){
-                    run.runItems!!.remove(item)
-                    break
-                }
-            }
-            if(run.runItems!!.isEmpty()){
-                runsToRemove.add(run)
-            }
-        }
-
-        for(run in runsToRemove){
-            runs.remove(run)
-        }
-    }
 
 }

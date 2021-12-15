@@ -1,20 +1,25 @@
 package org.wit.boitcrp.managers
 
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.fasterxml.jackson.module.kotlin.readValue
+import android.content.Context
+import android.net.Uri
+import com.google.gson.*
+import com.google.gson.reflect.TypeToken
 import org.wit.boitcrp.models.Item
-import java.io.File
-import java.nio.file.Paths
+import org.wit.placemark.helpers.*
+import java.lang.reflect.Type
+import kotlin.collections.ArrayList
 
-class ItemManager : Manager {
+
+class ItemManager(private val context: Context) {
     private var items : MutableList<Item> = emptyList<Item>().toMutableList()
-    val mapper = jacksonObjectMapper()
+    val JSON_FILE = "items.json"
+    val listType: Type = object : TypeToken<ArrayList<Item>>() {}.type
 
-    fun getItems(): MutableList<Item> {
-        return items;
-    }
-    fun getItem(index : Int): Item {
-        return items[index]
+
+    init {
+        if (exists(context, JSON_FILE)) {
+            deserialize()
+        }
     }
 
     fun searchItems(searchTerms : List<String>):List<Item>{
@@ -32,30 +37,62 @@ class ItemManager : Manager {
         return returnList
     }
 
-    fun setItem(index : Int,item : Item){
-        items[index] = item
+
+    private fun serialize() {
+        val jsonString = gsonBuilder.toJson(items, listType)
+        write(context, JSON_FILE, jsonString)
     }
-    fun removeItem(index : Int){
-        items.removeAt(index)
+
+    private fun deserialize() {
+        val jsonString = read(context, JSON_FILE)
+        items = gsonBuilder.fromJson(jsonString, listType)
     }
-    fun add(item : Item){
+
+    fun findAll(): List<Item> {
+        return items
+    }
+
+    fun create(item: Item) {
+        item.id = generateRandomId()
         items.add(item)
+        serialize()
     }
 
-    override fun save() {
-        mapper.writeValue(Paths.get("data/items.json").toFile(), items);
-    }
-
-    override fun load() {
-        val itemsFile = File("data/items.json")
-        if(!itemsFile.exists()) {
-
-            save()
-            return
+    fun update(item: Item) {
+        val foundItem: Item? = items.find { p -> p.id == item.id }
+        if (foundItem != null) {
+            foundItem.itemName = item.itemName
+            foundItem.pickUps = item.pickUps
         }
-        val loadItems = mapper.readValue<MutableList<Item>>(itemsFile)
-
-        items = loadItems
+        serialize()
     }
 
+    fun delete(item: Item) {
+        for(aitems in items) {
+            if(aitems.id == item.id){
+                items.remove(aitems)
+                serialize()
+                return
+            }
+        }
+    }
+
+}
+
+class UriParser : JsonDeserializer<Uri>, JsonSerializer<Uri> {
+    override fun deserialize(
+        json: JsonElement?,
+        typeOfT: Type?,
+        context: JsonDeserializationContext?
+    ): Uri {
+        return Uri.parse(json?.asString)
+    }
+
+    override fun serialize(
+        src: Uri?,
+        typeOfSrc: Type?,
+        context: JsonSerializationContext?
+    ): JsonElement {
+        return JsonPrimitive(src.toString())
+    }
 }

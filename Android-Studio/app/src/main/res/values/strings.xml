@@ -3,4 +3,12 @@
     <string name="btn_items">Items</string>
     <string name="btn_runs">Runs</string>
     <string name="title_text">Binding of Isaac\nTainted Cain Run Planner</string>
+    <string name="hint_itemName">Item Name</string>
+    <string name="button_addItem">Add Item</string>
+    <string name="button_updatePrompt">Update Item</string>
+    <string name="input_namePrompt">Enter Item Name</string>
+    <string name="menu_addItem">Add</string>
+    <string name="menu_deleteItem">Delete</string>
+    <string name="menu_cancelItem">Cancel</string>
+    <string name="menu_back">Back</string>
 </resources>
