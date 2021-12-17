@@ -21,12 +21,54 @@
             android:layout_height="wrap_content"
             app:titleTextColor="@color/colorPrimary" />
 
+
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="123dp"
+            android:orientation="horizontal"
+            android:paddingTop="56dp">
+
+            <EditText
+                android:id="@+id/searchField"
+                android:layout_width="286dp"
+                android:layout_height="48dp"
+                android:layout_margin="8dp"
+                android:autofillHints="asa"
+                android:hint="@string/hint_search"
+                android:inputType="text"
+                android:maxLines="1"
+                android:padding="8dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/searchbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:padding="8dp"
+                android:text="Search" />
+
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="581dp"
+            android:scrollbars="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

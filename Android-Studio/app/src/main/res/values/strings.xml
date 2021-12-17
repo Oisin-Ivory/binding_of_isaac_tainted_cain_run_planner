@@ -11,4 +11,17 @@
     <string name="menu_deleteItem">Delete</string>
     <string name="menu_cancelItem">Cancel</string>
     <string name="menu_back">Back</string>
+    <string name="button_addRun">Add Run</string>
+    <string name="hint_runName">Run Name</string>
+    <string name="button_addItemToRun">Add Item to Run</string>
+    <string name="button_removeItemFromRun">Remove Item from Run</string>
+    <string name="hint_search">Search Terms use "," for multiple terms</string>
+    <string name="pick_up_spinner_2">Pick Up 2</string>
+    <string name="pick_up_spinner_1">Pick Up 1</string>
+    <string name="pick_up_spinner_3">Pick Up 3</string>
+    <string name="pick_up_spinner_4">Pick Up 4</string>
+    <string name="pick_up_spinner_5">Pick Up 5</string>
+    <string name="pick_up_spinner_6">Pick Up 6</string>
+    <string name="pick_up_spinner_7">Pick Up 7</string>
+    <string name="pick_up_spinner_8">Pick Up 8</string>
 </resources>

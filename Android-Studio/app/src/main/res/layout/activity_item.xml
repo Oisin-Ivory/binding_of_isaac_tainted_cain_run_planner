@@ -44,7 +44,7 @@
                 <EditText
                     android:id="@+id/itemName"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="48dp"
                     android:layout_margin="8dp"
                     android:autofillHints="asa"
                     android:hint="@string/hint_itemName"
@@ -68,14 +68,14 @@
                         android:layout_margin="8dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Pick Up 1" />
+                        android:text="@string/pick_up_spinner_1" />
 
                     <Spinner
                         android:id="@+id/spinnerpickup1"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_margin="8dp"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"/>
 
                 </LinearLayout>
 
@@ -91,7 +91,7 @@
                         android:layout_margin="8dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Pick Up 2" />
+                        android:text="@string/pick_up_spinner_2" />
 
                     <Spinner
                         android:id="@+id/spinnerpickup2"
@@ -114,7 +114,7 @@
                         android:layout_margin="8dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Pick Up 3" />
+                        android:text="@string/pick_up_spinner_3" />
 
                     <Spinner
                         android:id="@+id/spinnerpickup3"
@@ -137,7 +137,7 @@
                         android:layout_margin="8dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Pick Up 4" />
+                        android:text="@string/pick_up_spinner_4" />
 
                     <Spinner
                         android:id="@+id/spinnerpickup4"
@@ -160,7 +160,7 @@
                         android:layout_margin="8dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Pick Up 5" />
+                        android:text="@string/pick_up_spinner_5" />
 
                     <Spinner
                         android:id="@+id/spinnerpickup5"
@@ -183,7 +183,7 @@
                         android:layout_margin="8dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Pick Up 6" />
+                        android:text="@string/pick_up_spinner_6" />
 
                     <Spinner
                         android:id="@+id/spinnerpickup6"
@@ -206,7 +206,7 @@
                         android:layout_margin="8dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Pick Up 7" />
+                        android:text="@string/pick_up_spinner_7" />
 
                     <Spinner
                         android:id="@+id/spinnerpickup7"
@@ -229,7 +229,7 @@
                         android:layout_margin="8dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Pick Up 8" />
+                        android:text="@string/pick_up_spinner_8" />
 
                     <Spinner
                         android:id="@+id/spinnerpickup8"
@@ -253,7 +253,7 @@
                     android:paddingBottom="8dp"
                     android:stateListAnimator="@null"
                     android:text="@string/button_addItem"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/white"
                     android:textSize="16sp" />
 
 

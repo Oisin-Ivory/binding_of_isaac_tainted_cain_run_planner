@@ -40,6 +40,15 @@ class RunManager(private val context: Context){
         serialize()
     }
 
+    fun update(run: Run){
+        val foundRun: Run? = runs.find { p -> p.id == run.id }
+        if (foundRun != null) {
+            foundRun.runName = run.runName
+            foundRun.runItems = run.runItems
+        }
+        serialize()
+    }
+
     fun searchRuns(searchTerms : List<String>):List<Run>{
         val returnList = emptyList<Run>().toMutableList()
 
@@ -53,6 +62,16 @@ class RunManager(private val context: Context){
             if(addToList) returnList.add(run)
         }
         return returnList
+    }
+
+    fun delete(run: Run) {
+        for(aruns in runs) {
+            if(aruns.id == run.id){
+                runs.remove(aruns)
+                serialize()
+                return
+            }
+        }
     }
 
 

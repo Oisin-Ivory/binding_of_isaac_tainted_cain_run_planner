@@ -10,7 +10,7 @@
 
     <color name="colorPrimary">#40372d</color>
     <color name="colorPrimaryDark">#373533</color>
-    <color name="colorAccent">#6e6259</color>
+    <color name="colorAccent">#665E57</color>
     <color name="colorBackgroundDark">#252525</color>
-
+    <color name="colorText">#A1958A</color>
 </resources>

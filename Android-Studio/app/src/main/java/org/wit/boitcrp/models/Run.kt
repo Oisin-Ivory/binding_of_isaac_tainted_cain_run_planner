@@ -5,9 +5,9 @@ import kotlinx.parcelize.Parcelize
 
 
 @Parcelize
-data class Run(var runName: String?,
-               var id: Long?,
-               var runItems: ArrayList<Item>?) : Parcelable {
+data class Run(var runName: String? = "",
+               var id: Long? = 0,
+               var runItems: ArrayList<Item>? = arrayListOf()) : Parcelable {
 
 
     fun addItem(item: Item){
@@ -22,4 +22,7 @@ data class Run(var runName: String?,
 
     }
 
+    fun FindAllItems():ArrayList<Item>{
+        return runItems!!
+    }
 }

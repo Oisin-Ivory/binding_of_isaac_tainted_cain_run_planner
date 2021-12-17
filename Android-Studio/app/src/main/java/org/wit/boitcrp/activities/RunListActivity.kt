@@ -33,10 +33,18 @@ class RunListActivity: AppCompatActivity(), RunListener {
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = RunAdapter(app.runs.findAll(),this)
+        binding.searchbtn.setOnClickListener(){
+            searchRuns()
+        }
         loadRuns()
         registerRefreshCallback()
     }
 
+    fun searchRuns(){
+        val terms = binding.searchField.text.split(",")
+        val displayItems = app.runs.searchRuns(terms)
+        showItems(displayItems)
+    }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu)
@@ -45,7 +53,7 @@ class RunListActivity: AppCompatActivity(), RunListener {
     override fun onOptionsItemSelected(run: MenuItem): Boolean {
         when (run.itemId) {
             R.id.item_add -> {
-                val launcherIntent = Intent(this, ItemActivity::class.java)
+                val launcherIntent = Intent(this, RunActivity::class.java)
                 refreshIntentLauncher.launch(launcherIntent)
             }
             R.id.item_back -> {
@@ -56,7 +64,7 @@ class RunListActivity: AppCompatActivity(), RunListener {
     }
 
     override fun onRunClick(run: Run) {
-        val launcherIntent = Intent(this, ItemActivity::class.java)
+        val launcherIntent = Intent(this, RunActivity::class.java)
         launcherIntent.putExtra("run_edit", run)
         refreshIntentLauncher.launch(launcherIntent)
     }
