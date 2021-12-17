@@ -75,7 +75,7 @@ class ItemsListActivity: AppCompatActivity(), ItemListener {
     private fun registerRefreshCallback() {
         refreshIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { loadItems() }
+            { showItems(app.items.findAll()) }
     }
 
     private fun loadItems() {
