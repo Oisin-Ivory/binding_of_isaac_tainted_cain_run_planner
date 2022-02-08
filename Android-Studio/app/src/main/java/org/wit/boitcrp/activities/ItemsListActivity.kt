@@ -12,7 +12,6 @@ import org.wit.boitcrp.R
 import org.wit.boitcrp.databinding.ActivityItemListBinding
 import org.wit.boitcrp.main.MainApp
 import org.wit.boitcrp.models.Item
-import org.wit.boitcrp.activities.ItemActivity
 import org.wit.boitcrp.adapters.ItemAdapter
 import org.wit.boitcrp.adapters.ItemListener
 
@@ -33,7 +32,7 @@ class ItemsListActivity: AppCompatActivity(), ItemListener {
         displayItems = app.items.findAll()
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = ItemAdapter(app.items.findAll(),this)
+        //binding.recyclerView.adapter = ItemAdapter(app.items.findAll(),this)
         loadItems()
         registerRefreshCallback()
 
@@ -83,7 +82,7 @@ class ItemsListActivity: AppCompatActivity(), ItemListener {
     }
 
     fun showItems (items: List<Item>) {
-        binding.recyclerView.adapter = ItemAdapter(items, this)
+        //binding.recyclerView.adapter = ItemAdapter(items, this)
         binding.recyclerView.adapter?.notifyDataSetChanged()
     }
 }

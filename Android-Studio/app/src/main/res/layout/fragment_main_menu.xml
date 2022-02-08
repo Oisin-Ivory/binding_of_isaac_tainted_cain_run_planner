@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.MainMenuFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="54dp">
+
+        <ImageView
+            android:id="@+id/main_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:foregroundGravity="center|center_horizontal"
+            android:src="@drawable/logo" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="247dp"
+            android:layout_height="179dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/cain" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:paddingTop="25dp">
+
+                <LinearLayout
+                    android:id="@+id/padd"
+                    android:layout_width="175dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/item_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="54dp"
+                        android:fontFamily="@font/upheavtt"
+                        android:gravity="center"
+                        android:text="@string/items"
+                        android:textColor="@color/colorFontDark"
+                        android:textSize="48sp" />
+
+                    <TextView
+                        android:id="@+id/items_count_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="54dp"
+                        android:fontFamily="@font/upheavtt"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/colorFontDark"
+                        android:textSize="48sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="175dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/run_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="54dp"
+                        android:fontFamily="@font/upheavtt"
+                        android:gravity="center"
+                        android:text="Runs"
+                        android:textColor="@color/colorFontDark"
+                        android:textSize="48sp" />
+
+                    <TextView
+                        android:id="@+id/runs_count_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="54dp"
+                        android:fontFamily="@font/upheavtt"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/colorFontDark"
+                        android:textSize="48sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

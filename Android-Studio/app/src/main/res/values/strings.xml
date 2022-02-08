@@ -24,4 +24,7 @@
     <string name="pick_up_spinner_6">Pick Up 6</string>
     <string name="pick_up_spinner_7">Pick Up 7</string>
     <string name="pick_up_spinner_8">Pick Up 8</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="items">Items</string>
 </resources>

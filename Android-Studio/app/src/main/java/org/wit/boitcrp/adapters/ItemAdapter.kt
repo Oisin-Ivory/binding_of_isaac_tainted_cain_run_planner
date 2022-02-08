@@ -1,21 +1,21 @@
 package org.wit.boitcrp.adapters
 
 import android.content.Context
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.wit.boitcrp.databinding.CardItemBinding
 import org.wit.boitcrp.models.Item
-import java.io.File
 import android.content.res.Resources
+import org.wit.boitcrp.fragments.ItemListFragment
 
 interface ItemListener {
     fun onItemClick(item: Item)
 }
 
-class ItemAdapter constructor(private var items: List<Item>,
-                              private val listener: ItemListener) :
+class ItemAdapter(private var items: List<Item>,
+                  private val listener: ItemListFragment
+) :
     RecyclerView.Adapter<ItemAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
@@ -35,7 +35,7 @@ class ItemAdapter constructor(private var items: List<Item>,
     class MainHolder(private val binding : CardItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Item, listener: ItemListener) {
+        fun bind(item: Item, listener: ItemListFragment) {
             binding.itemName.text = item.itemName
 
             val imageString = item.pickUps?.get(0)?.pickUpIcon?.split(".")

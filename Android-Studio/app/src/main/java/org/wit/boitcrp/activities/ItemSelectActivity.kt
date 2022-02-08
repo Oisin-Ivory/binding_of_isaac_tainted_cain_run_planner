@@ -15,7 +15,6 @@ import org.wit.boitcrp.adapters.ItemListener
 import org.wit.boitcrp.databinding.ActivityItemListBinding
 import org.wit.boitcrp.main.MainApp
 import org.wit.boitcrp.models.Item
-import org.wit.boitcrp.models.Run
 
 class ItemSelectActivity : AppCompatActivity(), ItemListener {
     lateinit var app: MainApp
@@ -109,7 +108,7 @@ class ItemSelectActivity : AppCompatActivity(), ItemListener {
     }
 
     fun showItems (items: List<Item>) {
-        binding.recyclerView.adapter = ItemAdapter(items, this)
+       // binding.recyclerView.adapter = ItemAdapter(items, this)
         binding.recyclerView.adapter?.notifyDataSetChanged()
     }
 }

@@ -5,13 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Spinner
-import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import org.wit.boitcrp.R
 import org.wit.boitcrp.main.MainApp
-import android.widget.ArrayAdapter
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.wit.boitcrp.adapters.ItemAdapter
@@ -60,7 +57,7 @@ class RunActivity : AppCompatActivity(), ItemListener {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = ItemAdapter(app.items.findAll(),this)
+        //binding.recyclerView.adapter = ItemAdapter(app.items.findAll(),this)
         loadItems()
 
 
@@ -136,7 +133,7 @@ class RunActivity : AppCompatActivity(), ItemListener {
     }
 
     fun showItems (items: List<Item>) {
-        binding.recyclerView.adapter = ItemAdapter(items, this)
+        //binding.recyclerView.adapter = ItemAdapter(items, this)
         binding.recyclerView.adapter?.notifyDataSetChanged()
     }
 
