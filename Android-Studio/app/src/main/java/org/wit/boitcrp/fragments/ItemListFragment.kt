@@ -7,6 +7,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.Fragment
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.wit.boitcrp.R
@@ -35,7 +36,7 @@ class ItemListFragment : Fragment() {
             super.onCreate(savedInstanceState)
             binding = FragmentItemListBinding.inflate(inflater, container, false)
             val root = binding.root
-            activity?.title = "@string/title_text"
+            activity?.title = "Items"
 
             displayItems = app.items.findAll()
             binding.recyclerView.setLayoutManager(LinearLayoutManager(activity))
@@ -73,10 +74,10 @@ class ItemListFragment : Fragment() {
             requireView().findNavController()) || super.onOptionsItemSelected(item)
     }
 
+
     fun onItemClick(item: Item) {
-        val launcherIntent = Intent()
-        launcherIntent.putExtra("item_edit", item)
-        refreshIntentLauncher.launch(launcherIntent)
+        val action = ItemListFragmentDirections.actionItemListFragmentToItemFragment(item)
+        findNavController().navigate(action)
     }
 
     private fun registerRefreshCallback() {

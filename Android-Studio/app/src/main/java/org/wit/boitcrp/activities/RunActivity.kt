@@ -114,19 +114,19 @@ class RunActivity : AppCompatActivity(), ItemListener {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(m_item: MenuItem): Boolean {
-        when (m_item.itemId) {
-            R.id.item_cancel -> {
-                finish()
-            }
-
-            R.id.item_delete -> {
-                app.runs.delete(run)
-                finish()
-            }
-        }
-        return super.onOptionsItemSelected(m_item)
-    }
+//    override fun onOptionsItemSelected(m_item: MenuItem): Boolean {
+//        when (m_item.itemId) {
+//            R.id.item_cancel -> {
+//                finish()
+//            }
+//
+//            R.id.item_delete -> {
+//                app.runs.delete(run)
+//                finish()
+//            }
+//        }
+//        return super.onOptionsItemSelected(m_item)
+//    }
 
     private fun loadItems() {
         showItems(run.FindAllItems())

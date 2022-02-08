@@ -13,6 +13,12 @@
         <action
             android:id="@+id/action_itemListFragment_to_mainMenuFragment"
             app:destination="@id/mainMenuFragment" />
+        <action
+            android:id="@+id/action_itemListFragment_to_itemFragment"
+            app:destination="@id/itemFragment" />
+        <action
+            android:id="@+id/action_itemListFragment_to_itemAddFragment"
+            app:destination="@id/itemAddFragment" />
     </fragment>
     <fragment
         android:id="@+id/mainMenuFragment"
@@ -21,6 +27,32 @@
         tools:layout="@layout/fragment_main_menu" >
         <action
             android:id="@+id/action_mainMenuFragment_to_itemListFragment"
+            app:destination="@id/itemListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemFragment"
+        android:name="org.wit.boitcrp.fragments.ItemFragment"
+        android:label="fragment_item"
+        tools:layout="@layout/fragment_item" >
+        <argument
+            android:name="item_to_use"
+            app:argType="org.wit.boitcrp.models.Item" />
+        <action
+            android:id="@+id/action_itemFragment_to_itemAddFragment"
+            app:destination="@id/itemAddFragment" />
+        <action
+            android:id="@+id/action_itemFragment_to_itemListFragment"
+            app:destination="@id/itemListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemAddFragment"
+        android:name="org.wit.boitcrp.fragments.ItemAddFragment"
+        android:label="ItemAddFragment" >
+        <argument
+            android:name="item_to_edit"
+            app:argType="org.wit.boitcrp.models.Item" />
+        <action
+            android:id="@+id/action_itemAddFragment_to_itemListFragment"
             app:destination="@id/itemListFragment" />
     </fragment>
 </navigation>

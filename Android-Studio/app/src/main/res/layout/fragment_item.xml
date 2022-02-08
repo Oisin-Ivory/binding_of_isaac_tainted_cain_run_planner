@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="org.wit.boitcrp.fragments.ItemFragment">
+
+    <LinearLayout
+        android:layout_width="424dp"
+        android:layout_height="647dp"
+        android:layout_marginTop="84dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/item_name"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:fontFamily="@font/upheavtt"
+            android:gravity="center"
+            android:text="item_name"
+            android:textColor="@color/colorFontDark"
+            android:textSize="48sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:layout_marginTop="64dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="62dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/pickupImage1"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    app:srcCompat="@android:drawable/alert_dark_frame" />
+
+                <ImageView
+                    android:id="@+id/pickupImage5"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    app:srcCompat="@android:drawable/alert_dark_frame" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="64dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/pickupImage2"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    app:srcCompat="@android:drawable/alert_dark_frame" />
+
+                <ImageView
+                    android:id="@+id/pickupImage6"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    app:srcCompat="@android:drawable/alert_dark_frame" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="63dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/pickupImage3"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    app:srcCompat="@android:drawable/alert_dark_frame" />
+
+                <ImageView
+                    android:id="@+id/pickupImage7"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    app:srcCompat="@android:drawable/alert_dark_frame" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="62dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/pickupImage4"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    app:srcCompat="@android:drawable/alert_dark_frame" />
+
+                <ImageView
+                    android:id="@+id/pickupImage8"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    app:srcCompat="@android:drawable/alert_dark_frame" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

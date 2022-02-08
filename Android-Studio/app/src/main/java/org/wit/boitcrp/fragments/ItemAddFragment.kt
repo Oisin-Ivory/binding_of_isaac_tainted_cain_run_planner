@@ -1,51 +1,68 @@
-package org.wit.boitcrp.activities
+package org.wit.boitcrp.fragments
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
+import android.view.*
+import android.widget.ArrayAdapter
 import android.widget.Spinner
-import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.google.android.material.snackbar.Snackbar
 import org.wit.boitcrp.R
-import org.wit.boitcrp.databinding.ActivityItemBinding
+import org.wit.boitcrp.databinding.FragmentItemAddBinding
+import org.wit.boitcrp.databinding.FragmentItemListBinding
 import org.wit.boitcrp.main.MainApp
 import org.wit.boitcrp.models.Item
-import android.widget.ArrayAdapter
-import org.wit.boitcrp.models.PickUp
+
+class ItemAddFragment : Fragment() {
 
 
-class ItemActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityItemBinding
+    private lateinit var binding: FragmentItemAddBinding
 
     var item = Item()
-
+    var edit = false
+    lateinit var appRoot: View
     lateinit var app: MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        var edit = false
-
-        binding = ActivityItemBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        binding.toolbarAdd.title = title
-        setSupportActionBar(binding.toolbarAdd)
-
-        app = application as MainApp
+        setHasOptionsMenu(true)
+        app = activity?.application as MainApp
+        setHasOptionsMenu(true)
 
 
-        if (intent.hasExtra("item_edit")) {
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View?{
+        super.onCreate(savedInstanceState)
+        binding = FragmentItemAddBinding.inflate(inflater, container, false)
+        val root = binding.root
+
+        val bundle = arguments
+        if(bundle?.getParcelable<Item>("item_to_edit") == null){
+            edit = false
+            activity?.title = "New Item"
+        }else{
+            println("-----------------------------------------\n"+savedInstanceState?.getParcelable<Item>("item_to_edit"));
             edit = true
-            item = intent.extras?.getParcelable("item_edit")!!
-
-            binding.toolbarAdd.title = item.itemName
+            item = bundle?.getParcelable<Item>("item_to_edit")!!
+            activity?.title = item.itemName
             binding.itemName.setText(item.itemName)
             binding.btnAdd.setText(R.string.button_updatePrompt)
         }
 
+        appRoot = root
+        initSpinners(edit)
+        setupFinishButton()
+        return root
+    }
+
+    fun setupFinishButton(){
         binding.btnAdd.setOnClickListener() {
             item.itemName = binding.itemName.text.toString()
             item.pickUps?.set(0,
@@ -84,12 +101,9 @@ class ItemActivity : AppCompatActivity() {
 
                 }
             }
-            setResult(RESULT_OK)
-            finish()
+            val action = ItemAddFragmentDirections.actionItemAddFragmentToItemListFragment()
+            findNavController().navigate(action)
         }
-
-        initSpinners(edit)
-
     }
 
     fun initSpinners(edit: Boolean) {
@@ -105,43 +119,39 @@ class ItemActivity : AppCompatActivity() {
             binding.spinnerpickup8
         )
 
-        for (spinner in spinners){
+        for (spinner in spinners) {
 
             val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
-                this, android.R.layout.simple_spinner_item, app.pickups.findAllNames()
+                appRoot.getContext(), android.R.layout.simple_spinner_item, app.pickups.findAllNames()
             )
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinner.setAdapter(adapter)
         }
 
-        if(edit){
-            for (i in 0..7){
+        if (edit) {
+            for (i in 0..7) {
                 item.pickUps?.get(i)
                     ?.let { app.pickups.getPickUpIndex(it) }?.let { spinners[i].setSelection(it) }
             }
         }
-
-
-    }
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_item, menu)
-        return super.onCreateOptionsMenu(menu)
     }
 
-//    override fun onOptionsItemSelected(m_item: MenuItem): Boolean {
-//        when (m_item.itemId) {
-//            R.id.item_cancel -> {
-//                finish()
-//            }
-//
-//            R.id.item_delete -> {
-//                app.items.delete(item)
-//                println("---------------------------------------\nDeleting item " + item.id)
-//                finish()
-//            }
-//        }
-//        return super.onOptionsItemSelected(m_item)
-//    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_item_add, menu)
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item,
+            requireView().findNavController()) || super.onOptionsItemSelected(item)
+    }
 
 
+    companion object {
+        @JvmStatic
+        fun newInstance(param1: String, param2: String) =
+            ItemListFragment()
+    }
 }

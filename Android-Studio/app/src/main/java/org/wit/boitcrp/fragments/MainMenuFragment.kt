@@ -36,7 +36,7 @@ class MainMenuFragment : Fragment() {
         super.onCreate(savedInstanceState)
         binding = FragmentMainMenuBinding.inflate(inflater, container, false)
         val root = binding.root
-        activity?.title = "@string/title_text"
+        activity?.title = "Main Menu"
 
 
         updateRunItemDisplay()
