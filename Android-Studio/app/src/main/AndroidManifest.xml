@@ -13,7 +13,8 @@
         android:theme="@style/Theme.BOITCRP">
         <activity
             android:name=".activities.Home"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.BOITCRP.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

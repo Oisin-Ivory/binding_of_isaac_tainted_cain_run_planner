@@ -53,7 +53,7 @@ class MainMenuFragment : Fragment() {
     }
 
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    /*override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_main_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
@@ -61,7 +61,7 @@ class MainMenuFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return NavigationUI.onNavDestinationSelected(item,
             requireView().findNavController()) || super.onOptionsItemSelected(item)
-    }
+    }*/
 
     private fun registerRefreshCallback() {
         refreshIntentLauncher =
