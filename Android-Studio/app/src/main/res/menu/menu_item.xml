@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/itemListFragment"
-        android:icon="@drawable/ic_menu_back"
-        android:title="@string/menu_back"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/delete_item"
         android:title="@string/menu_deleteItem"/>
 

@@ -23,6 +23,7 @@
                 android:layout_height="64dp"
                 android:gravity="center_vertical"
                 android:textSize="20sp"
+                android:fontFamily="@font/upheavtt"
                 tools:text="A Title" />
 
             <LinearLayout
@@ -35,6 +36,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:fontFamily="@font/upheavtt"
                     android:textSize="16sp" />
 
                 <TextView
@@ -42,6 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:fontFamily="@font/upheavtt"
                     android:textSize="16sp" />
 
                 <TextView
@@ -49,6 +52,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:fontFamily="@font/upheavtt"
                     android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>

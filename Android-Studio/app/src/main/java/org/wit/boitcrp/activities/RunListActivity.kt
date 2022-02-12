@@ -32,7 +32,7 @@ class RunListActivity: AppCompatActivity(), RunListener {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = RunAdapter(app.runs.findAll(),this)
+        //binding.recyclerView.adapter = RunAdapter(app.runs.findAll(),this)
         binding.searchbtn.setOnClickListener(){
             searchRuns()
         }
@@ -80,7 +80,7 @@ class RunListActivity: AppCompatActivity(), RunListener {
     }
 
     fun showItems (runs: List<Run>) {
-        binding.recyclerView.adapter = RunAdapter(runs, this)
+        //binding.recyclerView.adapter = RunAdapter(runs, this)
         binding.recyclerView.adapter?.notifyDataSetChanged()
     }
 }

@@ -29,4 +29,9 @@
     <string name="items">Items</string>
     <string name="menu_edit">Edit</string>
     <string name="nav_about">About</string>
+    <string name="home">Home</string>
+    <string name="cain_app_icon">Cain App Icon</string>
+    <string name="game_title">The Binding of Isaac</string>
+    <string name="TCRP">Tainted Cain Run Planner</string>
+    <string name="btn_home">Home</string>
 </resources>

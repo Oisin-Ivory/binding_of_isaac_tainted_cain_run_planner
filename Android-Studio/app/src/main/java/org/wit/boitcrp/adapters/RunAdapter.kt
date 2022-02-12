@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.wit.boitcrp.databinding.CardRunBinding
+import org.wit.boitcrp.fragments.RunListFragment
 import org.wit.boitcrp.models.Run
 
 
@@ -13,8 +14,9 @@ interface RunListener {
     fun onRunClick(run: Run)
 }
 
-class RunAdapter constructor(private var runs: List<Run>,
-                             private val listener: RunListener) :
+class RunAdapter(private var runs: List<Run>,
+                 private val listener: RunListFragment
+) :
     RecyclerView.Adapter<RunAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {

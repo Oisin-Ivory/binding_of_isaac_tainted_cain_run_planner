@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/itemListFragment"
         android:name="org.wit.boitcrp.fragments.ItemListFragment"
-        android:label="fragment_item_list"
-        tools:layout="@layout/fragment_item_list" >
+        android:label="@string/items"
+        tools:layout="@layout/fragment_item_list">
         <action
             android:id="@+id/action_itemListFragment_to_mainMenuFragment"
             app:destination="@id/mainMenuFragment" />
@@ -23,17 +23,20 @@
     <fragment
         android:id="@+id/mainMenuFragment"
         android:name="org.wit.boitcrp.fragments.MainMenuFragment"
-        android:label="fragment_main_menu"
-        tools:layout="@layout/fragment_main_menu" >
+        android:label="@string/home"
+        tools:layout="@layout/fragment_main_menu">
         <action
             android:id="@+id/action_mainMenuFragment_to_itemListFragment"
             app:destination="@id/itemListFragment" />
+        <action
+            android:id="@+id/action_mainMenuFragment_to_runListFragment"
+            app:destination="@id/runListFragment" />
     </fragment>
     <fragment
         android:id="@+id/itemFragment"
         android:name="org.wit.boitcrp.fragments.ItemFragment"
-        android:label="fragment_item"
-        tools:layout="@layout/fragment_item" >
+        android:label="Item"
+        tools:layout="@layout/fragment_item">
         <argument
             android:name="item_to_use"
             app:argType="org.wit.boitcrp.models.Item" />
@@ -54,5 +57,66 @@
         <action
             android:id="@+id/action_itemAddFragment_to_itemListFragment"
             app:destination="@id/itemListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/runListFragment"
+        android:name="org.wit.boitcrp.fragments.RunListFragment"
+        android:label="@string/btn_runs">
+        <action
+            android:id="@+id/action_runListFragment_to_runFragment"
+            app:destination="@id/runFragment" />
+        <action
+            android:id="@+id/action_runListFragment_to_mainMenuFragment"
+            app:destination="@id/mainMenuFragment" />
+        <action
+            android:id="@+id/action_runListFragment_to_runAddFragment"
+            app:destination="@id/runAddFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/runFragment"
+        android:name="org.wit.boitcrp.fragments.RunFragment"
+        android:label="Run"
+        tools:layout="@layout/fragment_run">
+        <argument
+            android:name="run_to_use"
+            app:argType="org.wit.boitcrp.models.Run" />
+        <action
+            android:id="@+id/action_runFragment_to_runListFragment"
+            app:destination="@id/runListFragment" />
+        <action
+            android:id="@+id/action_runFragment_to_runAddFragment"
+            app:destination="@id/runAddFragment" />
+        <action
+            android:id="@+id/action_runFragment_to_itemFragment"
+            app:destination="@id/itemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/runAddFragment"
+        android:name="org.wit.boitcrp.fragments.RunAddFragment"
+        android:label="Editing Runs"
+        tools:layout="@layout/fragment_run_add">
+        <action
+            android:id="@+id/action_runAddFragment_to_runListFragment"
+            app:destination="@id/runListFragment" />
+        <argument
+            android:name="run_to_edit"
+            app:argType="org.wit.boitcrp.models.Run"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_runAddFragment_to_itemSelectFragment"
+            app:destination="@id/itemSelectFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemSelectFragment"
+        android:name="org.wit.boitcrp.fragments.ItemSelectFragment"
+        android:label="Item Select"
+        tools:layout="@layout/fragment_item_select">
+        <action
+            android:id="@+id/action_itemSelectFragment_to_runAddFragment"
+            app:destination="@id/runAddFragment" />
+        <argument
+            android:name="item_list"
+            app:argType="org.wit.boitcrp.models.Item[]"
+            app:nullable="true" />
     </fragment>
 </navigation>

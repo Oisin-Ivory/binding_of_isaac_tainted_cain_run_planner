@@ -11,13 +11,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.wit.boitcrp.R
-import org.wit.boitcrp.activities.ItemActivity
 import org.wit.boitcrp.adapters.ItemAdapter
+import org.wit.boitcrp.adapters.ItemListener
 import org.wit.boitcrp.databinding.FragmentItemListBinding
 import org.wit.boitcrp.main.MainApp
 import org.wit.boitcrp.models.Item
 
-class ItemListFragment : Fragment() {
+class ItemListFragment : Fragment(), ItemListener {
     lateinit var app: MainApp
     private lateinit var binding: FragmentItemListBinding
     private lateinit var refreshIntentLauncher: ActivityResultLauncher<Intent>
@@ -70,12 +70,14 @@ class ItemListFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+
         return NavigationUI.onNavDestinationSelected(item,
             requireView().findNavController()) || super.onOptionsItemSelected(item)
     }
 
 
-    fun onItemClick(item: Item) {
+    override fun onItemClick(item: Item) {
         val action = ItemListFragmentDirections.actionItemListFragmentToItemFragment(item)
         findNavController().navigate(action)
     }

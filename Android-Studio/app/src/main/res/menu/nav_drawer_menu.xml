@@ -5,17 +5,24 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/mainMenuFragment"
+            android:icon="@drawable/completion_beast_hard"
+            android:title="@string/btn_home" />
+        <item
             android:id="@+id/itemListFragment"
+            android:icon="@drawable/completion_bluewomb_hard"
             android:title="@string/btn_items" />
         <item
             android:id="@+id/runListFragment"
+            android:icon="@drawable/completion_brimstone_hard"
             android:title="@string/btn_runs" />
     </group>
 
-    <item android:title="Temp">
+    <item android:title="@string/nav_about">
         <menu>
             <item
                 android:id="@+id/nav_share"
+                android:icon="@drawable/completion_heart_hard"
                 android:title="@string/nav_about" />
 
         </menu>

@@ -28,7 +28,6 @@ class ItemAddFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
         app = activity?.application as MainApp
         setHasOptionsMenu(true)
 
