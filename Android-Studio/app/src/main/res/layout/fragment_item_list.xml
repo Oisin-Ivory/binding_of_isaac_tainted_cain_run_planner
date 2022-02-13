@@ -15,9 +15,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="123dp"
-            android:orientation="horizontal"
-            android:paddingTop="56dp">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/searchField"
@@ -25,12 +24,12 @@
                 android:layout_height="48dp"
                 android:layout_margin="8dp"
                 android:autofillHints="asa"
+                android:fontFamily="@font/upheavtt"
                 android:hint="@string/hint_search"
                 android:inputType="text"
                 android:maxLines="1"
                 android:padding="8dp"
                 android:textColor="@color/colorPrimaryDark"
-                android:fontFamily="@font/upheavtt"
                 android:textSize="14sp" />
 
             <Button
@@ -39,8 +38,8 @@
                 android:layout_height="48dp"
                 android:layout_margin="8dp"
                 android:layout_weight="1"
-                android:padding="8dp"
                 android:fontFamily="@font/upheavtt"
+                android:padding="8dp"
                 android:text="Search" />
 
 
@@ -49,7 +48,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="485dp"
+            android:layout_height="636dp"
             android:scrollbars="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 

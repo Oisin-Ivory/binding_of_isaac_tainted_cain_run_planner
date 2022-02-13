@@ -26,6 +26,16 @@
                 android:textColor="@color/colorFontDark"
                 android:textSize="48sp" />
 
+            <TextView
+                android:id="@+id/seed_name"
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:fontFamily="@font/upheavtt"
+                android:gravity="center"
+                android:text="seed_name"
+                android:textColor="@color/colorFontDark"
+                android:textSize="24sp" />
+
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

@@ -34,4 +34,5 @@
     <string name="game_title">The Binding of Isaac</string>
     <string name="TCRP">Tainted Cain Run Planner</string>
     <string name="btn_home">Home</string>
+    <string name="hint_runSeed">Seed</string>
 </resources>

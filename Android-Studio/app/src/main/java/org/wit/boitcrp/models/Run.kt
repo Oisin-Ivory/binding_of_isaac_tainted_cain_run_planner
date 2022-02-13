@@ -7,6 +7,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Run(var runName: String? = "",
                var id: Long? = 0,
+               var seed: String? = "",
                var runItems: ArrayList<Item>? = arrayListOf()) : Parcelable {
 
 

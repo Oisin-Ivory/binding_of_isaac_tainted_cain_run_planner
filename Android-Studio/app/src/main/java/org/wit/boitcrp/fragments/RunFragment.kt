@@ -45,6 +45,7 @@ class RunFragment : Fragment() {
         run = bundle?.getParcelable("run_to_use")!!
         activity?.title = run.runName
         binding.runName.text = run.runName
+        binding.seedName.text = run.seed
 
         loadRuns()
         return root

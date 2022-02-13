@@ -68,7 +68,7 @@ class RunAddFragment : Fragment() {
             edit = true
             run = bundle?.getParcelable<Run>("run_to_edit")!!
             activity?.title = run.runName
-
+            binding.runSeed.setText(run.seed)
             binding.runName.setText(run.runName)
             binding.btnAdd.setText(R.string.button_updatePrompt)
 
@@ -89,7 +89,7 @@ class RunAddFragment : Fragment() {
     fun setupFinishButton(){
         binding.btnAdd.setOnClickListener() {
             run.runName = binding.runName.text.toString()
-
+            run.seed = binding.runSeed.text.toString()
             if (run.runName!!.isEmpty()) {
                 Snackbar.make(it, R.string.input_namePrompt, Snackbar.LENGTH_LONG)
                     .show()

@@ -42,9 +42,23 @@
                     android:maxLength="25"
                     android:maxLines="1"
                     android:padding="8dp"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorTextPrimary"
                     android:textSize="14sp" />
 
+
+                <EditText
+                    android:id="@+id/runSeed"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_margin="8dp"
+                    android:autofillHints="asa"
+                    android:hint="@string/hint_runSeed"
+                    android:inputType="text"
+                    android:maxLength="25"
+                    android:maxLines="1"
+                    android:padding="8dp"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="14sp" />
 
                 <Button
                     android:id="@+id/btnAddItem"
@@ -81,7 +95,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="369dp"
+                    android:layout_height="317dp"
                     android:scrollbars="vertical"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 

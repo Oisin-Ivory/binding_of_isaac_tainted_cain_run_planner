@@ -14,9 +14,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="123dp"
-            android:orientation="horizontal"
-            android:paddingTop="56dp">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/searchField"
@@ -46,7 +45,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="485dp"
+            android:layout_height="629dp"
             android:scrollbars="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </LinearLayout>

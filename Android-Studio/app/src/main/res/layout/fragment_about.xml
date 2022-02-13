@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.AboutFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="675dp"
+        android:layout_marginTop="32dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/headerText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/upheavtt"
+            android:gravity="center_horizontal"
+            android:text="@string/nav_about"
+            android:textSize="60sp" />
+
+        <ImageView
+            android:id="@+id/bagIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/collectible_bag_of_crafting_icon" />
+
+        <TextView
+            android:id="@+id/aboutText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/upheavtt"
+            android:gravity="center_horizontal"
+            android:padding="8dp"
+            android:text="This app was created for The Binding of Isaac: Rebirth, created by Edmund McMillen and Nicalis.\nThis app was mainly created for the character Tainted Cain, as Cain cannot pick up items the player must combine pickups to create them.\nThis app allows users to record the item combinations for items. Recently Tainted Cain was changed so that items are seed based with some exceptions,so users can now enter seeds for runs."
+            android:textSize="24sp" />
+    </LinearLayout>
+
+</FrameLayout>

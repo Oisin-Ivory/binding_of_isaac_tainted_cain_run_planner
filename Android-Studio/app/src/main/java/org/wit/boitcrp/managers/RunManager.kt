@@ -45,6 +45,7 @@ class RunManager(private val context: Context){
         if (foundRun != null) {
             foundRun.runName = run.runName
             foundRun.runItems = run.runItems
+            foundRun.seed = run.seed
         }
         serialize()
     }
