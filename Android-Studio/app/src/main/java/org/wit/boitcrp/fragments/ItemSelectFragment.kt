@@ -30,14 +30,14 @@ class ItemSelectFragment : Fragment() {
 
         val bundle = arguments
         app = activity?.application as MainApp
-        println("---------------------------------\nChecking--------------------------------")
-        println(bundle?.getParcelableArray("item_list"))
+       // println("---------------------------------\nChecking--------------------------------")
+       // println(bundle?.getParcelableArray("item_list"))
         if(bundle?.getParcelableArray("item_list") == null){
-            println("---------------------------------\nNo Items Passed--------------------------------")
+            //println("---------------------------------\nNo Items Passed--------------------------------")
             items = app.items.findAll()
             remove = false
         }else{
-            println("---------------------------------\nItems Passed---------------------------------")
+            //println("---------------------------------\nItems Passed---------------------------------")
             items = bundle.getParcelableArray("item_list")!!.toList() as List<Item>
             remove = true
         }
@@ -67,14 +67,8 @@ class ItemSelectFragment : Fragment() {
 
         val result = item
         if(remove){
-            println("-----------------------------------------------------")
-            println("selected: " + item.itemName+" to remove")
-            println("-----------------------------------------------------")
             setFragmentResult("item_to_remove", bundleOf("item" to result))
         }else{
-            println("-----------------------------------------------------")
-            println("selected: " + item.itemName + " to add")
-            println("-----------------------------------------------------")
             setFragmentResult("item_to_add", bundleOf("item" to result))
         }
         getActivity()?.onBackPressed();

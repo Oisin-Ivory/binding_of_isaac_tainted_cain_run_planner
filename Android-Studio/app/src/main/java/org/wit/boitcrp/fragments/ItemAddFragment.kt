@@ -100,8 +100,7 @@ class ItemAddFragment : Fragment() {
 
                 }
             }
-            val action = ItemAddFragmentDirections.actionItemAddFragmentToItemListFragment()
-            findNavController().navigate(action)
+            activity?.onBackPressed()
         }
     }
 

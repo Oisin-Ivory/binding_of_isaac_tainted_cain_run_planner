@@ -29,9 +29,6 @@ class RunAddFragment : Fragment() {
         app = activity?.application as MainApp
         setHasOptionsMenu(true)
         setFragmentResultListener("item_to_add") { _, bundle ->
-            println("-----------------------------------------------")
-            println("recived item to add")
-            println("-----------------------------------------------")
             val content = bundle.getParcelable<Item>("item")
             if (content != null) {
                 run.addItem(content)
@@ -39,9 +36,6 @@ class RunAddFragment : Fragment() {
         }
 
         setFragmentResultListener("item_to_remove") { _, bundle ->
-            println("-----------------------------------------------")
-            println("recived item to remove")
-            println("-----------------------------------------------")
             val content = bundle.getParcelable<Item>("item")
             if (content != null) {
                 run.removeItem(content.id)
