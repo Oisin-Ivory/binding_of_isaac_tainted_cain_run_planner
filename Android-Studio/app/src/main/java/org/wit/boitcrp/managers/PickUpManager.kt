@@ -156,7 +156,7 @@ class PickUpManager(private val context: Context) {
         val goldenBattery = PickUp("Golden Battery", "goldenbattery.png", locationList)
 
         locationList = listOf("Tainted Blue Baby")
-        val poopNugget = PickUp("Golden Battery", "poopnugget.png", locationList)
+        val poopNugget = PickUp("Poop Nugget", "poopnugget.png", locationList)
 
         locationList = listOf("Unknown")
         val unknown = PickUp("Unknown", "unknown.png", locationList)
