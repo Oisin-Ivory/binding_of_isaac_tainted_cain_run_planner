@@ -3,24 +3,31 @@ package org.wit.boitcrp.ui.run
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.wit.boitcrp.R
 import org.wit.boitcrp.adapters.ItemAdapterForRun
+import org.wit.boitcrp.adapters.RunAdapter
 import org.wit.boitcrp.databinding.FragmentRunBinding
 import org.wit.boitcrp.ui.itemlist.ItemListFragment
 import org.wit.boitcrp.main.MainApp
 import org.wit.boitcrp.models.Item
 import org.wit.boitcrp.models.Run
+import org.wit.boitcrp.models.managers.RunManager
+import org.wit.boitcrp.ui.item.ItemFragmentArgs
+import org.wit.boitcrp.ui.item.ItemFragmentViewModel
 
 class RunFragment : Fragment() {
 
 
     private lateinit var binding: FragmentRunBinding
-
-    var run = Run()
+    private lateinit var runFragmentViewModel: RunFragmentViewModel
+    private val args by navArgs<RunFragmentArgs>()
 
     lateinit var app: MainApp
 
@@ -41,24 +48,14 @@ class RunFragment : Fragment() {
         binding.recyclerView.setLayoutManager(LinearLayoutManager(activity))
         val root = binding.root
 
-        val bundle = arguments
-        run = bundle?.getParcelable("run_to_use")!!
-        activity?.title = run.runName
-        binding.runName.text = run.runName
-        binding.seedName.text = run.seed
+        runFragmentViewModel = ViewModelProvider(this).get(RunFragmentViewModel::class.java)
+        runFragmentViewModel.observableRun.observe(viewLifecycleOwner, Observer { render() })
 
-        loadRuns()
         return root
     }
 
-
-    private fun loadRuns() {
-        showItems(run.FindAllItems())
-    }
-
-    fun showItems (items: List<Item>) {
-        binding.recyclerView.adapter = ItemAdapterForRun(items, this)
-        binding.recyclerView.adapter?.notifyDataSetChanged()
+    fun render(){
+        binding.run = runFragmentViewModel
     }
 
     fun onItemClick(item: Item) {
@@ -76,13 +73,13 @@ class RunFragment : Fragment() {
     override fun onOptionsItemSelected(mitem: MenuItem): Boolean {
 
         if(mitem.itemId == R.id.delete_run) {
-            app.runs.delete(run)
+            RunManager.delete(runFragmentViewModel.observableRun.value!!)
             val action = RunFragmentDirections.actionRunFragmentToRunListFragment()
             findNavController().navigate(action)
             return super.onOptionsItemSelected(mitem)
         }
         if(mitem.itemId == R.id.edit_run) {
-            val action = RunFragmentDirections.actionRunFragmentToRunAddFragment(run)
+            val action = RunFragmentDirections.actionRunFragmentToRunAddFragment(runFragmentViewModel.observableRun.value!!)
             findNavController().navigate(action)
             return super.onOptionsItemSelected(mitem)
         }
@@ -91,7 +88,11 @@ class RunFragment : Fragment() {
             requireView().findNavController()) || super.onOptionsItemSelected(mitem)
     }
 
-
+    override fun onResume() {
+        super.onResume()
+        runFragmentViewModel.setRun(args.runToUse)
+        binding.recyclerView.adapter = ItemAdapterForRun(runFragmentViewModel.observableRun.value?.runItems!!, this)
+    }
     companion object {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =

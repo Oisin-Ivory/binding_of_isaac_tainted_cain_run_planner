@@ -6,26 +6,26 @@ import org.wit.boitcrp.models.Run
 import org.wit.placemark.helpers.*
 import java.lang.reflect.Type
 
-class RunManager(private val context: Context){
+object RunManager{
     private var runs : MutableList<Run> = emptyList<Run>().toMutableList()
     val JSON_FILE = "runs.json"
     val listType: Type = object : TypeToken<ArrayList<Run>>() {}.type
 
-    init {
-        if (exists(context, JSON_FILE)) {
-            deserialize()
-        }
-    }
-
-    private fun serialize() {
-        val jsonString = gsonBuilder.toJson(runs, listType)
-        write(context, JSON_FILE, jsonString)
-    }
-
-    private fun deserialize() {
-        val jsonString = read(context, JSON_FILE)
-        runs = gsonBuilder.fromJson(jsonString, listType)
-    }
+//    init {
+//        if (exists(context, JSON_FILE)) {
+//            deserialize()
+//        }
+//    }
+//
+//    private fun serialize() {
+//        val jsonString = gsonBuilder.toJson(runs, listType)
+//        write(context, JSON_FILE, jsonString)
+//    }
+//
+//    private fun deserialize() {
+//        val jsonString = read(context, JSON_FILE)
+//        runs = gsonBuilder.fromJson(jsonString, listType)
+//    }
 
     fun findAll(): List<Run> {
         return runs
@@ -34,7 +34,7 @@ class RunManager(private val context: Context){
     fun create(run: Run) {
         run.id = generateRandomId()
         runs.add(run)
-        serialize()
+        //serialize()
     }
 
     fun update(run: Run){
@@ -44,7 +44,7 @@ class RunManager(private val context: Context){
             foundRun.runItems = run.runItems
             foundRun.seed = run.seed
         }
-        serialize()
+        //serialize()
     }
 
     fun searchRuns(searchTerms : List<String>):List<Run>{
@@ -66,7 +66,7 @@ class RunManager(private val context: Context){
         for(aruns in runs) {
             if(aruns.id == run.id){
                 runs.remove(aruns)
-                serialize()
+                //serialize()
                 return
             }
         }

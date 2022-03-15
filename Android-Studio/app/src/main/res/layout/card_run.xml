@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="run"
+            type="org.wit.boitcrp.models.Run" />
+    </data>
+<androidx.cardview.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="8dp"
     android:elevation="24dp">
 
@@ -24,7 +31,7 @@
                 android:gravity="center_vertical"
                 android:textSize="20sp"
                 android:fontFamily="@font/upheavtt"
-                tools:text="A Title" />
+                tools:text='@{run.runName ?? "null"}' />
 
             <LinearLayout
                 android:layout_width="187dp"
@@ -37,6 +44,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:fontFamily="@font/upheavtt"
+                    tools:text='@{run.runItems.get(0).itemName ?? ""}'
                     android:textSize="16sp" />
 
                 <TextView
@@ -45,6 +53,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:fontFamily="@font/upheavtt"
+                    tools:text='@{run.runItems.get(1).itemName ?? ""}'
                     android:textSize="16sp" />
 
                 <TextView
@@ -53,9 +62,11 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:fontFamily="@font/upheavtt"
+                    tools:text='@{run.runItems.get(2).itemName ?? ""}'
                     android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
+</layout>

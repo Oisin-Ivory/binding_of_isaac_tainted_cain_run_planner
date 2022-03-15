@@ -18,10 +18,5 @@ class ItemListViewModel : ViewModel() {
 
     fun load() {
         itemList.value = ItemManager.findAll()
-        println("---------------------------------------------------------")
-        for (item in itemList.value!!){
-            println(item.itemName)
-        }
-        println("---------------------------------------------------------")
     }
 }

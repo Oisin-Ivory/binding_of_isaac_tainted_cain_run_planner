@@ -5,21 +5,25 @@ import android.content.res.Resources
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.NavigationUI
 import org.wit.boitcrp.R
 import org.wit.boitcrp.databinding.FragmentItemBinding
 import org.wit.boitcrp.main.MainApp
 import org.wit.boitcrp.models.Item
+import org.wit.boitcrp.models.managers.ItemManager
 import org.wit.boitcrp.ui.itemlist.ItemListFragment
 
 class ItemFragment : Fragment() {
 
 
     private lateinit var binding: FragmentItemBinding
-
-    var item = Item()
+    private lateinit var itemFragmentViewModel: ItemFragmentViewModel
+    private val args by navArgs<ItemFragmentArgs>()
 
     lateinit var app: MainApp
 
@@ -40,82 +44,15 @@ class ItemFragment : Fragment() {
         binding = FragmentItemBinding.inflate(inflater, container, false)
         val root = binding.root
 
-        val bundle = arguments
-        item = bundle?.getParcelable("item_to_use")!!
-        activity?.title = item.itemName
+        itemFragmentViewModel = ViewModelProvider(this).get(ItemFragmentViewModel::class.java)
+        itemFragmentViewModel.observableItem.observe(viewLifecycleOwner, Observer { render() })
 
-        displayItemPickups()
         return root
     }
 
-    fun displayItemPickups(){
-        binding.itemName.text = item.itemName
 
-        val imageString = item.pickUps?.get(0)?.pickUpIcon?.split(".")
-        val image = imageString?.get(0)
-        val resID: Int = binding.root.context.resIdByName(image, "drawable")
-        binding.pickupImage1.setImageResource(resID)
-
-        val imageString1 = item.pickUps?.get(1)?.pickUpIcon?.split(".")
-        val image1 = imageString1?.get(0)
-        val resID1: Int = binding.root.context.resIdByName(image1, "drawable")
-        binding.pickupImage2.setImageResource(resID1)
-
-        val imageString2 = item.pickUps?.get(2)?.pickUpIcon?.split(".")
-        val image2 = imageString2?.get(0)
-        val resID2: Int = binding.root.context.resIdByName(image2, "drawable")
-        binding.pickupImage3.setImageResource(resID2)
-
-        val imageString3 = item.pickUps?.get(3)?.pickUpIcon?.split(".")
-        val image3 = imageString3?.get(0)
-        val resID3: Int = binding.root.context.resIdByName(image3, "drawable")
-        binding.pickupImage4.setImageResource(resID3)
-
-        val imageString4 = item.pickUps?.get(4)?.pickUpIcon?.split(".")
-        val image4 = imageString4?.get(0)
-        val resID4: Int = binding.root.context.resIdByName(image4, "drawable")
-        binding.pickupImage5.setImageResource(resID4)
-
-        val imageString5 = item.pickUps?.get(5)?.pickUpIcon?.split(".")
-        val image5 = imageString5?.get(0)
-        val resID5: Int = binding.root.context.resIdByName(image5, "drawable")
-        binding.pickupImage6.setImageResource(resID5)
-
-        val imageString6 = item.pickUps?.get(6)?.pickUpIcon?.split(".")
-        val image6 = imageString6?.get(0)
-        val resID6: Int = binding.root.context.resIdByName(image6, "drawable")
-        binding.pickupImage7.setImageResource(resID6)
-
-        val imageString7 = item.pickUps?.get(7)?.pickUpIcon?.split(".")
-        val image7 = imageString7?.get(0)
-        val resID7: Int = binding.root.context.resIdByName(image7, "drawable")
-        binding.pickupImage8.setImageResource(resID7)
-        println("-----------------------------------------------------------------")
-        println("Res ID from context: " + resID)
-        println("Res ID from class: " + item.GetPickUpResString(0))
-        println("-----------------------------------------------------------------")
-        println("Res ID from context: " + resID1)
-        println("Res ID from class: " + item.GetPickUpResString(1))
-        println("-----------------------------------------------------------------")
-        println("Res ID from context: " + resID2)
-        println("Res ID from class: " + item.GetPickUpResString(2))
-        println("-----------------------------------------------------------------")
-        println("Res ID from context: " + resID3)
-        println("Res ID from class: " + item.GetPickUpResString(3))
-        println("-----------------------------------------------------------------")
-        println("Res ID from context: " + resID4)
-        println("Res ID from class: " + item.GetPickUpResString(4))
-        println("-----------------------------------------------------------------")
-        println("Res ID from context: " + resID5)
-        println("Res ID from class: " + item.GetPickUpResString(5))
-        println("-----------------------------------------------------------------")
-        println("Res ID from context: " + resID6)
-        println("Res ID from class: " + item.GetPickUpResString(6))
-        println("-----------------------------------------------------------------")
-        println("Res ID from context: " + resID7)
-        println("Res ID from class: " + item.GetPickUpResString(7))
-        println("-----------------------------------------------------------------")
-
+    fun render(){
+        binding.item = itemFragmentViewModel
     }
 
     fun Context.resIdByName(resIdName: String?, resType: String): Int {
@@ -134,15 +71,14 @@ class ItemFragment : Fragment() {
 
     override fun onOptionsItemSelected(mitem: MenuItem): Boolean {
 
-        print("--------------------------------------------------\n"+item)
         if(mitem.itemId == R.id.delete_item) {
-            //app.items.delete(item)
+            ItemManager.delete(itemFragmentViewModel.observableItem.value!!)
             val action = ItemFragmentDirections.actionItemFragmentToItemListFragment()
             findNavController().navigate(action)
             return super.onOptionsItemSelected(mitem)
         }
         if(mitem.itemId == R.id.edit_item) {
-            val action = ItemFragmentDirections.actionItemFragmentToItemAddFragment(item)
+            val action = ItemFragmentDirections.actionItemFragmentToItemAddFragment(args.itemToUse)
             findNavController().navigate(action)
             return super.onOptionsItemSelected(mitem)
         }
@@ -151,6 +87,15 @@ class ItemFragment : Fragment() {
             requireView().findNavController()) || super.onOptionsItemSelected(mitem)
     }
 
+    override fun onResume() {
+        super.onResume()
+        itemFragmentViewModel.setItem(args.itemToUse)
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+    }
 
     companion object {
         @JvmStatic

@@ -13,12 +13,22 @@ class ItemAddViewModel : ViewModel() {
     val observableStatus: LiveData<Boolean>
         get() = status
 
-    fun addItem(item: Item) {
-        status.value = try {
-            ItemManager.create(item)
-            true
-        } catch (e: IllegalArgumentException) {
-            false
+    fun addItem(item: Item,edit: Boolean) {
+        if(edit){
+            status.value = try {
+                println("______________________________________________________________________updaing item "+item.itemName)
+                ItemManager.update(item)
+                true
+            } catch (e: IllegalArgumentException) {
+                false
+            }
+        }else{
+            status.value = try {
+                ItemManager.create(item)
+                true
+            } catch (e: IllegalArgumentException) {
+                false
+            }
         }
     }
 

@@ -13,6 +13,7 @@ import org.wit.boitcrp.databinding.FragmentItemSelectBinding
 import org.wit.boitcrp.ui.itemlist.ItemListFragment
 import org.wit.boitcrp.main.MainApp
 import org.wit.boitcrp.models.Item
+import org.wit.boitcrp.models.managers.ItemManager
 
 
 class ItemSelectFragment : Fragment() {
@@ -32,7 +33,7 @@ class ItemSelectFragment : Fragment() {
        // println(bundle?.getParcelableArray("item_list"))
         if(bundle?.getParcelableArray("item_list") == null){
             //println("---------------------------------\nNo Items Passed--------------------------------")
-            //items = app.items.findAll()
+            items = ItemManager.findAll()
             remove = false
         }else{
             //println("---------------------------------\nItems Passed---------------------------------")

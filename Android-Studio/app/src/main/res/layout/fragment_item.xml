@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="item"
+            type="org.wit.boitcrp.ui.item.ItemFragmentViewModel" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,7 +29,7 @@
             android:layout_height="54dp"
             android:fontFamily="@font/upheavtt"
             android:gravity="center"
-            android:text="item_name"
+            android:text="@={item.observableItem.itemName}"
             android:textColor="@color/colorFontDark"
             android:textSize="48sp" />
 
@@ -42,13 +49,14 @@
                     android:id="@+id/pickupImage1"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    app:srcCompat="@android:drawable/alert_dark_frame" />
+                    app:imageResource="@{item.observableItem.GetPickUpResString(0)}"
+                />
 
                 <ImageView
                     android:id="@+id/pickupImage5"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    app:srcCompat="@android:drawable/alert_dark_frame" />
+                    app:imageResource="@{item.observableItem.GetPickUpResString(4)}"/>
 
             </LinearLayout>
 
@@ -61,13 +69,13 @@
                     android:id="@+id/pickupImage2"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    app:srcCompat="@android:drawable/alert_dark_frame" />
+                    app:imageResource="@{item.observableItem.GetPickUpResString(1)}" />
 
                 <ImageView
                     android:id="@+id/pickupImage6"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    app:srcCompat="@android:drawable/alert_dark_frame" />
+                    app:imageResource="@{item.observableItem.GetPickUpResString(5)}" />
 
             </LinearLayout>
 
@@ -80,13 +88,13 @@
                     android:id="@+id/pickupImage3"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    app:srcCompat="@android:drawable/alert_dark_frame" />
+                    app:imageResource="@{item.observableItem.GetPickUpResString(4)}" />
 
                 <ImageView
                     android:id="@+id/pickupImage7"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    app:srcCompat="@android:drawable/alert_dark_frame" />
+                    app:imageResource="@{item.observableItem.GetPickUpResString(6)}" />
             </LinearLayout>
 
             <LinearLayout
@@ -98,15 +106,16 @@
                     android:id="@+id/pickupImage4"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    app:srcCompat="@android:drawable/alert_dark_frame" />
+                    app:imageResource="@{item.observableItem.GetPickUpResString(5)}" />
 
                 <ImageView
                     android:id="@+id/pickupImage8"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    app:srcCompat="@android:drawable/alert_dark_frame" />
+                    app:imageResource="@{item.observableItem.GetPickUpResString(7)}" />
             </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

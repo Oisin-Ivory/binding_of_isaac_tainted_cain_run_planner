@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.snackbar.Snackbar
 import org.wit.boitcrp.R
@@ -17,6 +18,7 @@ import org.wit.boitcrp.databinding.FragmentItemAddBinding
 import org.wit.boitcrp.main.MainApp
 import org.wit.boitcrp.models.Item
 import org.wit.boitcrp.ui.itemlist.ItemListFragment
+import org.wit.boitcrp.ui.run.RunFragmentArgs
 
 class ItemAddFragment : Fragment() {
 
@@ -24,10 +26,12 @@ class ItemAddFragment : Fragment() {
     private lateinit var binding: FragmentItemAddBinding
     private lateinit var itemAddViewModel: ItemAddViewModel
 
-    //var item = Item()
-    //var edit = false
+    var item = Item()
+    var edit = false
     lateinit var appRoot: View
     lateinit var app: MainApp
+
+    private val args by navArgs<ItemAddFragmentArgs>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,21 +53,19 @@ class ItemAddFragment : Fragment() {
                 status -> status?.let { render(status) }
         })
 
-//        val bundle = arguments
-//        if(bundle?.getParcelable<Item>("item_to_edit") == null){
-//            edit = false
-//            activity?.title = "New Item"
-//        }else{
-//            println("-----------------------------------------\n"+savedInstanceState?.getParcelable<Item>("item_to_edit"));
-//            edit = true
-//            item = bundle?.getParcelable<Item>("item_to_edit")!!
-//            activity?.title = item.itemName
-//            binding.itemName.setText(item.itemName)
-//            binding.btnAdd.setText(R.string.button_updatePrompt)
-//        }
+        if(args.itemToEdit == null){
+            edit = false
+            activity?.title = "New Item"
+        }else{
+            edit = true
+            item = args.itemToEdit!!
+            activity?.title = item.itemName
+            binding.itemName.setText(item.itemName)
+            binding.btnAdd.setText(R.string.button_updatePrompt)
+        }
 
         appRoot = root
-        initSpinners(false)
+        initSpinners(edit)
         setupFinishButton()
         return root
     }
@@ -72,7 +74,6 @@ class ItemAddFragment : Fragment() {
         when (status) {
             true -> {
                 view?.let {
-                    //Uncomment this if you want to immediately return to Report
                     findNavController().popBackStack()
                 }
             }
@@ -82,7 +83,7 @@ class ItemAddFragment : Fragment() {
 
     fun setupFinishButton(){
         binding.btnAdd.setOnClickListener() {
-            var item = Item()
+
             item.itemName = binding.itemName.text.toString()
             item.pickUps?.set(0,
                 app.pickups.findPickupName(binding.spinnerpickup1.getSelectedItem().toString())!!
@@ -113,7 +114,7 @@ class ItemAddFragment : Fragment() {
                 Snackbar.make(it,R.string.input_namePrompt, Snackbar.LENGTH_LONG)
                     .show()
             } else {
-                itemAddViewModel.addItem(item);
+                itemAddViewModel.addItem(item,edit)
             }
         }
     }
@@ -140,12 +141,12 @@ class ItemAddFragment : Fragment() {
             spinner.setAdapter(adapter)
         }
 
-//        if (edit) {
-//            for (i in 0..7) {
-//                item.pickUps?.get(i)
-//                    ?.let { app.pickups.getPickUpIndex(it) }?.let { spinners[i].setSelection(it) }
-//            }
-//        }
+        if (edit) {
+            for (i in 0..7) {
+                item.pickUps?.get(i)
+                    ?.let { app.pickups.getPickUpIndex(it) }?.let { spinners[i].setSelection(it) }
+            }
+        }
     }
 
 

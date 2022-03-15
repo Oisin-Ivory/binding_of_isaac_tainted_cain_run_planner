@@ -113,7 +113,10 @@ class ItemListFragment : Fragment(), ItemListener {
 //        binding.recyclerView.adapter = ItemAdapter(items, this)
 //        binding.recyclerView.adapter?.notifyDataSetChanged()
 //    }
-
+    override fun onResume() {
+    super.onResume()
+    itemListViewModel.load()
+}
 
     companion object {
         @JvmStatic

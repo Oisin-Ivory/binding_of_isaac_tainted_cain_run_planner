@@ -9,7 +9,6 @@ import org.wit.placemark.helpers.*
 import java.lang.reflect.Type
 import kotlin.collections.ArrayList
 
-
 object ItemManager {
     private var items : MutableList<Item> = emptyList<Item>().toMutableList()
     val JSON_FILE = "items.json"
@@ -22,7 +21,10 @@ object ItemManager {
 //        }
         var i = 0;
         while(i < 10){
-            items.add(Item())
+            val itemToAdd = Item()
+
+            itemToAdd.itemName = "New Item "+i
+            create(itemToAdd)
             i++;
         }
     }
@@ -64,8 +66,11 @@ object ItemManager {
     }
 
     fun update(item: Item) {
+        println("______________________________________________\nsearching item: "+item.itemName+":"+item.id)
+
         val foundItem: Item? = items.find { p -> p.id == item.id }
         if (foundItem != null) {
+            println("______________________________________________\nFound item: "+foundItem.itemName)
             foundItem.itemName = item.itemName
             foundItem.pickUps = item.pickUps
         }

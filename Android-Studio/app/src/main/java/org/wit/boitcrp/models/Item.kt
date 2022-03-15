@@ -8,7 +8,7 @@ import org.wit.boitcrp.main.MainApp
 
 @Parcelize
 data class Item(var itemName: String = "",
-                var id: Long = 0,
+                var id: Long = -1,
                 var pickUps: Array<PickUp>? = arrayOf(PickUp(),PickUp(),PickUp(),PickUp(),PickUp(),PickUp(),PickUp(),PickUp())
 ) : Parcelable {
     public fun GetPickUpResString(slot : Int) : Int {

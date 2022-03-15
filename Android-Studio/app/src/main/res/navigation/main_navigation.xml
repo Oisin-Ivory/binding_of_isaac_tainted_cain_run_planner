@@ -62,7 +62,9 @@
         android:label="Editing Items">
         <argument
             android:name="item_to_edit"
-            app:argType="org.wit.boitcrp.models.Item" />
+            app:argType="org.wit.boitcrp.models.Item"
+            app:nullable="true"
+            android:defaultValue="@null" />
         <action
             android:id="@+id/action_itemAddFragment_to_itemListFragment"
             app:destination="@id/itemListFragment" />

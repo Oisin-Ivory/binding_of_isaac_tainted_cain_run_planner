@@ -9,6 +9,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import org.wit.boitcrp.databinding.FragmentMainMenuBinding
 import org.wit.boitcrp.ui.itemlist.ItemListFragment
 import org.wit.boitcrp.main.MainApp
+import org.wit.boitcrp.models.managers.ItemManager
+import org.wit.boitcrp.models.managers.RunManager
 
 class MainMenuFragment : Fragment() {
     lateinit var app: MainApp
@@ -39,8 +41,8 @@ class MainMenuFragment : Fragment() {
     }
 
     private fun updateRunItemDisplay(){
-        //numItems = app.items.findAll().size
-        numRuns = app.runs.findAll().size
+        numItems = ItemManager.findAll().size
+        numRuns = RunManager.findAll().size
         binding.itemsCountText.text = numItems.toString()
         binding.runsCountText.text = numRuns.toString()
     }
