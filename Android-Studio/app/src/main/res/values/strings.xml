@@ -35,4 +35,6 @@
     <string name="TCRP">Tainted Cain Run Planner</string>
     <string name="btn_home">Home</string>
     <string name="hint_runSeed">Seed</string>
+    <string name="no_items_found_text">No Items Found</string>
+    <string name="itemError">Error adding item.</string>
 </resources>

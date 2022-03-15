@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="item"
+            type="org.wit.boitcrp.models.Item" />
+    </data>
+
+<androidx.cardview.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="8dp"
     android:elevation="24dp">
 
@@ -24,6 +32,7 @@
 
                 <TextView
                     android:id="@+id/itemName"
+                    android:text='@{item.itemName ?? "is null" }'
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -47,13 +56,13 @@
                         android:id="@+id/pickupImage1"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        app:srcCompat="@android:drawable/alert_dark_frame" />
+                        app:imageResource="@{item.GetPickUpResString(0)}"/>
 
                     <ImageView
                         android:id="@+id/pickupImage5"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        app:srcCompat="@android:drawable/alert_dark_frame" />
+                         app:imageResource="@{item.GetPickUpResString(4)}" />
 
                 </LinearLayout>
 
@@ -66,13 +75,13 @@
                         android:id="@+id/pickupImage2"
                         android:layout_width="match_parent"
                         android:layout_height="32dp"
-                        app:srcCompat="@android:drawable/alert_dark_frame" />
+                         app:imageResource="@{item.GetPickUpResString(1)}" />
 
                     <ImageView
                         android:id="@+id/pickupImage6"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        app:srcCompat="@android:drawable/alert_dark_frame" />
+                         app:imageResource="@{item.GetPickUpResString(5)}" />
 
                 </LinearLayout>
 
@@ -85,13 +94,13 @@
                         android:id="@+id/pickupImage3"
                         android:layout_width="match_parent"
                         android:layout_height="32dp"
-                        app:srcCompat="@android:drawable/alert_dark_frame" />
+                         app:imageResource="@{item.GetPickUpResString(2)}" />
 
                     <ImageView
                         android:id="@+id/pickupImage7"
                         android:layout_width="match_parent"
                         android:layout_height="32dp"
-                        app:srcCompat="@android:drawable/alert_dark_frame" />
+                         app:imageResource="@{item.GetPickUpResString(6)}" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -103,13 +112,13 @@
                         android:id="@+id/pickupImage4"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        app:srcCompat="@android:drawable/alert_dark_frame" />
+                         app:imageResource="@{item.GetPickUpResString(3)}" />
 
                     <ImageView
                         android:id="@+id/pickupImage8"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        app:srcCompat="@android:drawable/alert_dark_frame" />
+                         app:imageResource="@{item.GetPickUpResString(7)}" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -117,3 +126,4 @@
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
+</layout>

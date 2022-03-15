@@ -1,4 +1,4 @@
-package org.wit.boitcrp.fragments
+package org.wit.boitcrp.ui.itemselect
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,18 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
-import org.wit.boitcrp.R
-import org.wit.boitcrp.adapters.ItemAdapter
 import org.wit.boitcrp.adapters.ItemAdapterSelection
-import org.wit.boitcrp.databinding.FragmentItemListBinding
 import org.wit.boitcrp.databinding.FragmentItemSelectBinding
-import org.wit.boitcrp.databinding.FragmentRunListBinding
+import org.wit.boitcrp.ui.itemlist.ItemListFragment
 import org.wit.boitcrp.main.MainApp
 import org.wit.boitcrp.models.Item
-import org.wit.boitcrp.models.Run
 
 
 class ItemSelectFragment : Fragment() {
@@ -37,7 +32,7 @@ class ItemSelectFragment : Fragment() {
        // println(bundle?.getParcelableArray("item_list"))
         if(bundle?.getParcelableArray("item_list") == null){
             //println("---------------------------------\nNo Items Passed--------------------------------")
-            items = app.items.findAll()
+            //items = app.items.findAll()
             remove = false
         }else{
             //println("---------------------------------\nItems Passed---------------------------------")
@@ -60,7 +55,7 @@ class ItemSelectFragment : Fragment() {
         if(remove)
             binding.recyclerView.adapter = ItemAdapterSelection(items, this)
         else
-            binding.recyclerView.adapter = ItemAdapterSelection(app.items.findAll(), this)
+            //binding.recyclerView.adapter = ItemAdapterSelection(app.items.findAll(), this)
 
         setButtonListener(binding)
         return root

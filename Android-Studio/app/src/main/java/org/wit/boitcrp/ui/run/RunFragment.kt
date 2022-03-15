@@ -1,4 +1,4 @@
-package org.wit.boitcrp.fragments
+package org.wit.boitcrp.ui.run
 
 import android.os.Bundle
 import android.view.*
@@ -8,9 +8,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.wit.boitcrp.R
-import org.wit.boitcrp.adapters.ItemAdapter
 import org.wit.boitcrp.adapters.ItemAdapterForRun
 import org.wit.boitcrp.databinding.FragmentRunBinding
+import org.wit.boitcrp.ui.itemlist.ItemListFragment
 import org.wit.boitcrp.main.MainApp
 import org.wit.boitcrp.models.Item
 import org.wit.boitcrp.models.Run

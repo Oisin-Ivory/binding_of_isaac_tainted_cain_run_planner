@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/itemListFragment"
-        android:name="org.wit.boitcrp.fragments.ItemListFragment"
+        android:name="org.wit.boitcrp.ui.itemlist.ItemListFragment"
         android:label="@string/items"
         tools:layout="@layout/fragment_item_list">
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainMenuFragment"
-        android:name="org.wit.boitcrp.fragments.MainMenuFragment"
+        android:name="org.wit.boitcrp.ui.mainmenu.MainMenuFragment"
         android:label="@string/home"
         tools:layout="@layout/fragment_main_menu">
         <action
@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/itemFragment"
-        android:name="org.wit.boitcrp.fragments.ItemFragment"
+        android:name="org.wit.boitcrp.ui.item.ItemFragment"
         android:label="Item"
         tools:layout="@layout/fragment_item">
         <argument
@@ -58,7 +58,7 @@
     </fragment>
     <fragment
         android:id="@+id/itemAddFragment"
-        android:name="org.wit.boitcrp.fragments.ItemAddFragment"
+        android:name="org.wit.boitcrp.ui.itemadd.ItemAddFragment"
         android:label="Editing Items">
         <argument
             android:name="item_to_edit"
@@ -69,7 +69,7 @@
     </fragment>
     <fragment
         android:id="@+id/runListFragment"
-        android:name="org.wit.boitcrp.fragments.RunListFragment"
+        android:name="org.wit.boitcrp.ui.runlist.RunListFragment"
         android:label="@string/btn_runs">
         <action
             android:id="@+id/action_runListFragment_to_runFragment"
@@ -83,7 +83,7 @@
     </fragment>
     <fragment
         android:id="@+id/runFragment"
-        android:name="org.wit.boitcrp.fragments.RunFragment"
+        android:name="org.wit.boitcrp.ui.run.RunFragment"
         android:label="Run"
         tools:layout="@layout/fragment_run">
         <argument
@@ -101,7 +101,7 @@
     </fragment>
     <fragment
         android:id="@+id/runAddFragment"
-        android:name="org.wit.boitcrp.fragments.RunAddFragment"
+        android:name="org.wit.boitcrp.ui.runadd.RunAddFragment"
         android:label="Editing Runs"
         tools:layout="@layout/fragment_run_add">
         <action
@@ -117,7 +117,7 @@
     </fragment>
     <fragment
         android:id="@+id/itemSelectFragment"
-        android:name="org.wit.boitcrp.fragments.ItemSelectFragment"
+        android:name="org.wit.boitcrp.ui.itemselect.ItemSelectFragment"
         android:label="Item Select"
         tools:layout="@layout/fragment_item_select">
         <action
@@ -130,7 +130,7 @@
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="org.wit.boitcrp.fragments.AboutFragment"
+        android:name="org.wit.boitcrp.ui.about.AboutFragment"
         android:label="@string/nav_about"
         tools:layout="@layout/fragment_about">
         <action

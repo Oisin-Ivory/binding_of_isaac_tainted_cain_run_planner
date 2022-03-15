@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.wit.boitcrp.databinding.CardItemBinding
 import org.wit.boitcrp.models.Item
 import android.content.res.Resources
-import org.wit.boitcrp.fragments.ItemSelectFragment
+import org.wit.boitcrp.ui.itemselect.ItemSelectFragment
 
 interface ItemListenerSelection {
     fun onItemClick(item: Item)

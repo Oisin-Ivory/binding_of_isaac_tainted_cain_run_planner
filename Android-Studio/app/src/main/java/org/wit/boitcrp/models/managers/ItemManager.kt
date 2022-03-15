@@ -1,4 +1,4 @@
-package org.wit.boitcrp.managers
+package org.wit.boitcrp.models.managers
 
 import android.content.Context
 import android.net.Uri
@@ -10,15 +10,20 @@ import java.lang.reflect.Type
 import kotlin.collections.ArrayList
 
 
-class ItemManager(private val context: Context) {
+object ItemManager {
     private var items : MutableList<Item> = emptyList<Item>().toMutableList()
     val JSON_FILE = "items.json"
     val listType: Type = object : TypeToken<ArrayList<Item>>() {}.type
 
 
     init {
-        if (exists(context, JSON_FILE)) {
-            deserialize()
+//        if (exists(context, JSON_FILE)) {
+//            deserialize()
+//        }
+        var i = 0;
+        while(i < 10){
+            items.add(Item())
+            i++;
         }
     }
 
@@ -38,15 +43,15 @@ class ItemManager(private val context: Context) {
     }
 
 
-    private fun serialize() {
-        val jsonString = gsonBuilder.toJson(items, listType)
-        write(context, JSON_FILE, jsonString)
-    }
-
-    private fun deserialize() {
-        val jsonString = read(context, JSON_FILE)
-        items = gsonBuilder.fromJson(jsonString, listType)
-    }
+//    private fun serialize() {
+//        val jsonString = gsonBuilder.toJson(items, listType)
+//        write(context, JSON_FILE, jsonString)
+//    }
+//
+//    private fun deserialize() {
+//        val jsonString = read(context, JSON_FILE)
+//        items = gsonBuilder.fromJson(jsonString, listType)
+//    }
 
     fun findAll(): List<Item> {
         return items
@@ -55,7 +60,7 @@ class ItemManager(private val context: Context) {
     fun create(item: Item) {
         item.id = generateRandomId()
         items.add(item)
-        serialize()
+        //serialize()
     }
 
     fun update(item: Item) {
@@ -64,18 +69,19 @@ class ItemManager(private val context: Context) {
             foundItem.itemName = item.itemName
             foundItem.pickUps = item.pickUps
         }
-        serialize()
+        //serialize()
     }
 
     fun delete(item: Item) {
         for(aitems in items) {
             if(aitems.id == item.id){
                 items.remove(aitems)
-                serialize()
+                //serialize()
                 return
             }
         }
     }
+
 
 }
 

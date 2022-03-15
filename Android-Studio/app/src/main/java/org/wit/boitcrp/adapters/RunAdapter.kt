@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.wit.boitcrp.databinding.CardRunBinding
-import org.wit.boitcrp.fragments.RunListFragment
+import org.wit.boitcrp.ui.runlist.RunListFragment
 import org.wit.boitcrp.models.Run
 
 

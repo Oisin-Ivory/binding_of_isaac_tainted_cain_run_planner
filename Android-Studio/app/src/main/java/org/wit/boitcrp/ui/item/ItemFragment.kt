@@ -1,4 +1,4 @@
-package org.wit.boitcrp.fragments
+package org.wit.boitcrp.ui.item
 
 import android.content.Context
 import android.content.res.Resources
@@ -12,6 +12,7 @@ import org.wit.boitcrp.R
 import org.wit.boitcrp.databinding.FragmentItemBinding
 import org.wit.boitcrp.main.MainApp
 import org.wit.boitcrp.models.Item
+import org.wit.boitcrp.ui.itemlist.ItemListFragment
 
 class ItemFragment : Fragment() {
 
@@ -89,6 +90,31 @@ class ItemFragment : Fragment() {
         val image7 = imageString7?.get(0)
         val resID7: Int = binding.root.context.resIdByName(image7, "drawable")
         binding.pickupImage8.setImageResource(resID7)
+        println("-----------------------------------------------------------------")
+        println("Res ID from context: " + resID)
+        println("Res ID from class: " + item.GetPickUpResString(0))
+        println("-----------------------------------------------------------------")
+        println("Res ID from context: " + resID1)
+        println("Res ID from class: " + item.GetPickUpResString(1))
+        println("-----------------------------------------------------------------")
+        println("Res ID from context: " + resID2)
+        println("Res ID from class: " + item.GetPickUpResString(2))
+        println("-----------------------------------------------------------------")
+        println("Res ID from context: " + resID3)
+        println("Res ID from class: " + item.GetPickUpResString(3))
+        println("-----------------------------------------------------------------")
+        println("Res ID from context: " + resID4)
+        println("Res ID from class: " + item.GetPickUpResString(4))
+        println("-----------------------------------------------------------------")
+        println("Res ID from context: " + resID5)
+        println("Res ID from class: " + item.GetPickUpResString(5))
+        println("-----------------------------------------------------------------")
+        println("Res ID from context: " + resID6)
+        println("Res ID from class: " + item.GetPickUpResString(6))
+        println("-----------------------------------------------------------------")
+        println("Res ID from context: " + resID7)
+        println("Res ID from class: " + item.GetPickUpResString(7))
+        println("-----------------------------------------------------------------")
 
     }
 
@@ -110,7 +136,7 @@ class ItemFragment : Fragment() {
 
         print("--------------------------------------------------\n"+item)
         if(mitem.itemId == R.id.delete_item) {
-            app.items.delete(item)
+            //app.items.delete(item)
             val action = ItemFragmentDirections.actionItemFragmentToItemListFragment()
             findNavController().navigate(action)
             return super.onOptionsItemSelected(mitem)

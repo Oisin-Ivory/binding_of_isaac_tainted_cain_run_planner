@@ -1,15 +1,13 @@
-package org.wit.boitcrp.fragments
+package org.wit.boitcrp.ui.about
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import org.wit.boitcrp.R
 import org.wit.boitcrp.databinding.FragmentAboutBinding
-import org.wit.boitcrp.databinding.FragmentItemBinding
 import org.wit.boitcrp.main.MainApp
-import org.wit.boitcrp.models.Item
+import org.wit.boitcrp.ui.itemlist.ItemListFragment
 
 class AboutFragment : Fragment() {
 

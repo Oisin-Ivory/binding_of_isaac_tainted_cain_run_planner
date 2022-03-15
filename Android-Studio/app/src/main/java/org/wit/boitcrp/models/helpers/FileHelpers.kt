@@ -5,13 +5,9 @@ import android.net.Uri
 import android.util.Log.e
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.google.gson.reflect.TypeToken
-import org.wit.boitcrp.managers.UriParser
-import org.wit.boitcrp.models.Item
+import org.wit.boitcrp.models.managers.UriParser
 import java.io.*
-import java.lang.reflect.Type
 import java.util.*
-import kotlin.collections.ArrayList
 
 val gsonBuilder: Gson = GsonBuilder().setPrettyPrinting()
     .registerTypeAdapter(Uri::class.java, UriParser())

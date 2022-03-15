@@ -1,4 +1,4 @@
-package org.wit.boitcrp.managers
+package org.wit.boitcrp.models.managers
 
 interface Manager {
     fun findAll(): List<Any>

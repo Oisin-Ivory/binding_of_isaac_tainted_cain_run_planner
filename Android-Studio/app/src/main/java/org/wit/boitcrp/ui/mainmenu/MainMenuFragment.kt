@@ -1,4 +1,4 @@
-package org.wit.boitcrp.fragments
+package org.wit.boitcrp.ui.mainmenu
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,16 +6,9 @@ import android.view.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.Fragment
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI
-import androidx.recyclerview.widget.LinearLayoutManager
-import org.wit.boitcrp.R
-import org.wit.boitcrp.activities.ItemActivity
-import org.wit.boitcrp.adapters.ItemAdapter
-import org.wit.boitcrp.databinding.FragmentItemListBinding
 import org.wit.boitcrp.databinding.FragmentMainMenuBinding
+import org.wit.boitcrp.ui.itemlist.ItemListFragment
 import org.wit.boitcrp.main.MainApp
-import org.wit.boitcrp.models.Item
 
 class MainMenuFragment : Fragment() {
     lateinit var app: MainApp
@@ -46,7 +39,7 @@ class MainMenuFragment : Fragment() {
     }
 
     private fun updateRunItemDisplay(){
-        numItems = app.items.findAll().size
+        //numItems = app.items.findAll().size
         numRuns = app.runs.findAll().size
         binding.itemsCountText.text = numItems.toString()
         binding.runsCountText.text = numRuns.toString()

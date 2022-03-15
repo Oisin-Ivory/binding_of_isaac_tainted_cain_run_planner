@@ -1,4 +1,4 @@
-package org.wit.boitcrp.fragments
+package org.wit.boitcrp.ui.runlist
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,6 +14,7 @@ import org.wit.boitcrp.R
 import org.wit.boitcrp.adapters.RunAdapter
 import org.wit.boitcrp.adapters.RunListener
 import org.wit.boitcrp.databinding.FragmentRunListBinding
+import org.wit.boitcrp.ui.itemlist.ItemListFragment
 import org.wit.boitcrp.main.MainApp
 import org.wit.boitcrp.models.Run
 

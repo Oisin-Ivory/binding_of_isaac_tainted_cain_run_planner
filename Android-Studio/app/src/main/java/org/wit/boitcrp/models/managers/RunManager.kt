@@ -1,13 +1,10 @@
-package org.wit.boitcrp.managers
+package org.wit.boitcrp.models.managers
 
 import android.content.Context
 import com.google.gson.reflect.TypeToken
-import org.wit.boitcrp.models.Item
 import org.wit.boitcrp.models.Run
 import org.wit.placemark.helpers.*
-import java.io.File
 import java.lang.reflect.Type
-import java.nio.file.Paths
 
 class RunManager(private val context: Context){
     private var runs : MutableList<Run> = emptyList<Run>().toMutableList()

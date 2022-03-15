@@ -1,4 +1,4 @@
-package org.wit.boitcrp.fragments
+package org.wit.boitcrp.ui.runadd
 
 import android.os.Bundle
 import android.view.*
@@ -12,6 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 import org.wit.boitcrp.R
 import org.wit.boitcrp.adapters.ItemAdapterForAddRun
 import org.wit.boitcrp.databinding.FragmentRunAddBinding
+import org.wit.boitcrp.ui.itemlist.ItemListFragment
 import org.wit.boitcrp.main.MainApp
 import org.wit.boitcrp.models.Item
 import org.wit.boitcrp.models.Run
