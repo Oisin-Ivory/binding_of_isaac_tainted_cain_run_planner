@@ -21,7 +21,7 @@ import org.wit.boitcrp.ui.itemlist.ItemListFragment
 import org.wit.boitcrp.main.MainApp
 import org.wit.boitcrp.models.Item
 import org.wit.boitcrp.models.Run
-import org.wit.boitcrp.models.managers.RunManager
+//import org.wit.boitcrp.models.managers.RunManager
 import org.wit.boitcrp.ui.itemlist.ItemListViewModel
 
 class RunListFragment : Fragment(), RunListener {

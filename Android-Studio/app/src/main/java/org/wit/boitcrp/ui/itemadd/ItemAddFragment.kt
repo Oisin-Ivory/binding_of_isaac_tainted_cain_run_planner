@@ -85,28 +85,28 @@ class ItemAddFragment : Fragment() {
         binding.btnAdd.setOnClickListener() {
 
             item.itemName = binding.itemName.text.toString()
-            item.pickUps?.set(0,
+            item.setPickUp(0,
                 app.pickups.findPickupName(binding.spinnerpickup1.getSelectedItem().toString())!!
             )
-            item.pickUps?.set(1,
+            item.setPickUp(1,
                 app.pickups.findPickupName(binding.spinnerpickup2.getSelectedItem().toString())!!
             )
-            item.pickUps?.set(2,
+            item.setPickUp(2,
                 app.pickups.findPickupName(binding.spinnerpickup3.getSelectedItem().toString())!!
             )
-            item.pickUps?.set(3,
+            item.setPickUp(3,
                 app.pickups.findPickupName(binding.spinnerpickup4.getSelectedItem().toString())!!
             )
-            item.pickUps?.set(4,
+            item.setPickUp(4,
                 app.pickups.findPickupName(binding.spinnerpickup5.getSelectedItem().toString())!!
             )
-            item.pickUps?.set(5,
+            item.setPickUp(5,
                 app.pickups.findPickupName(binding.spinnerpickup6.getSelectedItem().toString())!!
             )
-            item.pickUps?.set(6,
+            item.setPickUp(6,
                 app.pickups.findPickupName(binding.spinnerpickup7.getSelectedItem().toString())!!
             )
-            item.pickUps?.set(7,
+            item.setPickUp(7,
                 app.pickups.findPickupName(binding.spinnerpickup8.getSelectedItem().toString())!!
             )
 

@@ -3,6 +3,7 @@ package org.wit.boitcrp.ui.run
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -18,7 +19,8 @@ import org.wit.boitcrp.ui.itemlist.ItemListFragment
 import org.wit.boitcrp.main.MainApp
 import org.wit.boitcrp.models.Item
 import org.wit.boitcrp.models.Run
-import org.wit.boitcrp.models.managers.RunManager
+import org.wit.boitcrp.ui.auth.LoggedInViewModel
+//import org.wit.boitcrp.models.managers.RunManager
 import org.wit.boitcrp.ui.item.ItemFragmentArgs
 import org.wit.boitcrp.ui.item.ItemFragmentViewModel
 
@@ -28,6 +30,8 @@ class RunFragment : Fragment() {
     private lateinit var binding: FragmentRunBinding
     private lateinit var runFragmentViewModel: RunFragmentViewModel
     private val args by navArgs<RunFragmentArgs>()
+
+    private val loggedInViewModel : LoggedInViewModel by activityViewModels()
 
     lateinit var app: MainApp
 
@@ -73,7 +77,11 @@ class RunFragment : Fragment() {
     override fun onOptionsItemSelected(mitem: MenuItem): Boolean {
 
         if(mitem.itemId == R.id.delete_run) {
-            RunManager.delete(runFragmentViewModel.observableRun.value!!)
+
+            runFragmentViewModel.deleteRun(
+                loggedInViewModel.liveFirebaseUser.value?.uid!!,
+                runFragmentViewModel.observableRun.value?.uid!!)
+
             val action = RunFragmentDirections.actionRunFragmentToRunListFragment()
             findNavController().navigate(action)
             return super.onOptionsItemSelected(mitem)

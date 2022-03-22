@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.wit.boitcrp.activities.RunListActivity">
+    tools:context="org.wit.boitcrp.ui.runlist.RunListFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             android:layout_marginTop="16dp"
             android:fontFamily="@font/upheavtt"
             android:gravity="center"
-            android:text="@string/no_items_found_text"
+            android:text="@string/no_runs_found_text"
             android:textSize="24sp" />
     </LinearLayout>
 

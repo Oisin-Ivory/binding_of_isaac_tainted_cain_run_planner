@@ -5,8 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseUser
+import org.wit.boitcrp.firebase.FirebaseDBManager
 import org.wit.boitcrp.models.Run
-import org.wit.boitcrp.models.managers.RunManager
+import java.lang.Exception
+
+//import org.wit.boitcrp.models.managers.RunManager
 
 class RunListFragmentViewModel : ViewModel() {
 
@@ -15,12 +19,22 @@ class RunListFragmentViewModel : ViewModel() {
     val observableRunList: LiveData<List<Run>>
         get() = runs
 
+    var liveFirebaseUser = MutableLiveData<FirebaseUser>()
+
     init {
         load()
     }
 
     fun load() {
-        runs.value = RunManager.findAll()
+        try {
+            //DonationManager.findAll(liveFirebaseUser.value?.email!!, donationsList)
+            FirebaseDBManager.findAll(liveFirebaseUser.value?.uid!!,
+                runs)
+            println("Report Load Success : ${runs.value.toString()}")
+        }
+        catch (e: Exception) {
+            println("Report Load Error : $e.message")
+        }
     }
 
 

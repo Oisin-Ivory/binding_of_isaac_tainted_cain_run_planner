@@ -7,10 +7,11 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.Fragment
 import androidx.activity.result.contract.ActivityResultContracts
 import org.wit.boitcrp.databinding.FragmentMainMenuBinding
+import org.wit.boitcrp.firebase.FirebaseDBManager
 import org.wit.boitcrp.ui.itemlist.ItemListFragment
 import org.wit.boitcrp.main.MainApp
 import org.wit.boitcrp.models.managers.ItemManager
-import org.wit.boitcrp.models.managers.RunManager
+//import org.wit.boitcrp.models.managers.RunManager
 
 class MainMenuFragment : Fragment() {
     lateinit var app: MainApp
@@ -42,7 +43,7 @@ class MainMenuFragment : Fragment() {
 
     private fun updateRunItemDisplay(){
         numItems = ItemManager.findAll().size
-        numRuns = RunManager.findAll().size
+        //numRuns = FirebaseDBManager.findAll().size
         binding.itemsCountText.text = numItems.toString()
         binding.runsCountText.text = numRuns.toString()
     }

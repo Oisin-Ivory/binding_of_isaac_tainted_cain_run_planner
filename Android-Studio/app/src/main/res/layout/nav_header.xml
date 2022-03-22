@@ -23,15 +23,25 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#2C2C2C"
+        android:fontFamily="@font/upheavtt"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="@string/game_title"
-        android:fontFamily="@font/upheavtt"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#2C2C2C"
+        android:fontFamily="@font/upheavtt"
+        android:text="@string/TCRP" />
+
+    <TextView
+        android:id="@+id/navHeaderEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#2C2C2C"
         android:fontFamily="@font/upheavtt"
         android:text="@string/TCRP" />
 

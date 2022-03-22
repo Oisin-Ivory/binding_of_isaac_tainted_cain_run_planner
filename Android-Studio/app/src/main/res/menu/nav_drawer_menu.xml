@@ -27,4 +27,14 @@
 
         </menu>
     </item>
+    <item android:title="@string/user_control">
+        <menu>
+            <item
+                android:id="@+id/signout"
+                android:icon="@drawable/completion_beast_hard"
+                android:onClick="signOut"
+                android:title="@string/sign_out" />
+
+        </menu>
+    </item>
 </menu>

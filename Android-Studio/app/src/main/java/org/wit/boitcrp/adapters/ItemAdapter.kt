@@ -30,6 +30,12 @@ class ItemAdapter(private var items: List<Item>,
         holder.bind(item, listener)
     }
 
+    fun removeAt(position: Int) {
+
+        items = mutableListOf(items).removeAt(position);
+        notifyItemRemoved(position)
+    }
+
     override fun getItemCount(): Int = items.size
 
     class MainHolder(private val binding : CardItemBinding) :
@@ -49,13 +55,6 @@ class ItemAdapter(private var items: List<Item>,
 
             binding.root.setOnClickListener { listener.onItemClick(item) }
             binding.executePendingBindings()
-        }
-
-        fun Context.resIdByName(resIdName: String?, resType: String): Int {
-            resIdName?.let {
-                return resources.getIdentifier(it, resType, packageName)
-            }
-            throw Resources.NotFoundException()
         }
     }
 }

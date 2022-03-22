@@ -13,6 +13,10 @@
         android:theme="@style/Theme.BOITCRP">
         <activity
             android:name=".activities.Home"
+            android:exported="false"
+            android:theme="@style/Theme.BOITCRP.NoActionBar"/>
+        <activity
+            android:name=".ui.auth.Login"
             android:exported="true"
             android:theme="@style/Theme.BOITCRP.NoActionBar">
             <intent-filter>

@@ -1,5 +1,6 @@
 package org.wit.boitcrp.ui.itemlist
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
@@ -12,23 +13,21 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import org.wit.boitcrp.R
 import org.wit.boitcrp.adapters.ItemAdapter
 import org.wit.boitcrp.adapters.ItemListener
 import org.wit.boitcrp.databinding.FragmentItemListBinding
 import org.wit.boitcrp.main.MainApp
 import org.wit.boitcrp.models.Item
+import androidx.fragment.app.activityViewModels
 
 class ItemListFragment : Fragment(), ItemListener {
-    lateinit var app: MainApp
     private lateinit var binding: FragmentItemListBinding
-    private lateinit var refreshIntentLauncher: ActivityResultLauncher<Intent>
     private lateinit var itemListViewModel: ItemListViewModel
-    //private lateinit var displayItems: List<Item>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        app = activity?.application as MainApp
         setHasOptionsMenu(true)
     }
 
@@ -37,19 +36,14 @@ class ItemListFragment : Fragment(), ItemListener {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreate(savedInstanceState)
+        itemListViewModel = ViewModelProvider(this).get(ItemListViewModel::class.java)
         binding = FragmentItemListBinding.inflate(inflater, container, false)
+
         val root = binding.root
         activity?.title = "Items"
 
-            //displayItems = app.items.findAll()
-            //binding.recyclerView.setLayoutManager(LinearLayoutManager(activity))
-            //binding.recyclerView.adapter = ItemAdapter(app.items.findAll(), this)
-            //loadItems()
-            //registerRefreshCallback()
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
-        itemListViewModel = ViewModelProvider(this).get(ItemListViewModel::class.java)
-        itemListViewModel.observableItemList.observe(viewLifecycleOwner, Observer {
-                items ->
+        itemListViewModel.observableItemList.observe(viewLifecycleOwner, Observer { items ->
             items?.let { render(items) }
         })
 
@@ -75,13 +69,20 @@ class ItemListFragment : Fragment(), ItemListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(item,
-            requireView().findNavController()) || super.onOptionsItemSelected(item)
+        println("_______________________________________________________________________")
+        for (item in itemListViewModel.observableItemList.value!!){
+            println(item.itemName)
+        }
+        println("_______________________________________________________________________")
+        return NavigationUI.onNavDestinationSelected(
+            item,
+            requireView().findNavController()
+        ) || super.onOptionsItemSelected(item)
     }
 
-    private fun render(itemList: List<Item>){
+    private fun render(itemList: List<Item>) {
         binding.recyclerView.adapter = ItemAdapter(itemList, this)
-        if(itemList.isEmpty()){
+        if (itemList.isEmpty()) {
             println("Rendering empty list")
             binding.recyclerView.visibility = View.GONE
             binding.NoItemsImage.visibility = View.VISIBLE
@@ -99,28 +100,8 @@ class ItemListFragment : Fragment(), ItemListener {
         findNavController().navigate(action)
     }
 
-//    private fun registerRefreshCallback() {
-//        refreshIntentLauncher =
-//            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-//            { showItems(app.items.findAll()) }
-//    }
-
-//    private fun loadItems() {
-//        showItems(displayItems)
-//    }
-
-//    fun showItems (items: List<Item>) {
-//        binding.recyclerView.adapter = ItemAdapter(items, this)
-//        binding.recyclerView.adapter?.notifyDataSetChanged()
-//    }
     override fun onResume() {
-    super.onResume()
-    itemListViewModel.load()
-}
-
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ItemListFragment()
+        super.onResume()
+        itemListViewModel.load()
     }
 }

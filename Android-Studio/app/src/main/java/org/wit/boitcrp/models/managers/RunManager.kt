@@ -1,4 +1,4 @@
-package org.wit.boitcrp.models.managers
+/*package org.wit.boitcrp.models.managers
 
 import android.content.Context
 import com.google.gson.reflect.TypeToken
@@ -73,4 +73,4 @@ object RunManager{
     }
 
 
-}
+}*/

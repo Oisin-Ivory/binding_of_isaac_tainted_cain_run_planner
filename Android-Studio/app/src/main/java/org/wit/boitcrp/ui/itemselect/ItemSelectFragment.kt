@@ -56,7 +56,7 @@ class ItemSelectFragment : Fragment() {
         if(remove)
             binding.recyclerView.adapter = ItemAdapterSelection(items, this)
         else
-            //binding.recyclerView.adapter = ItemAdapterSelection(app.items.findAll(), this)
+            binding.recyclerView.adapter = ItemAdapterSelection(ItemManager.findAll(), this)
 
         setButtonListener(binding)
         return root
