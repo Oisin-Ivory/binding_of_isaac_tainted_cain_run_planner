@@ -37,18 +37,10 @@ class RunAdapter(private var runs: List<Run>,
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(run: Run, listener: RunListener) {
-            binding.runName.text = run.runName
-            if(run.runItems?.size!! > 0) {
-                binding.runItem0.text = run.runItems?.get(0)?.itemName
-                if (run.runItems?.size!! > 1) {
-                    binding.runItem1.text = run.runItems?.get(1)?.itemName
-                    if (run.runItems?.size!! > 2) {
-                        binding.runItem2.text = run.runItems?.get(2)?.itemName
-                    }
-                }
-            }
+            binding.run = run
 
             binding.root.setOnClickListener { listener.onRunClick(run) }
+            binding.executePendingBindings()
         }
 
         fun Context.resIdByName(resIdName: String?, resType: String): Int {

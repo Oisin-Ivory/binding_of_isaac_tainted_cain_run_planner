@@ -129,7 +129,8 @@
         <argument
             android:name="item_list"
             app:argType="org.wit.boitcrp.models.Item[]"
-            app:nullable="true" />
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"

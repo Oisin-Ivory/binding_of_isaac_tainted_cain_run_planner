@@ -33,14 +33,12 @@ class RunAddFragment : Fragment() {
     var run = Run()
     var edit = false
     lateinit var appRoot: View
-    lateinit var app: MainApp
 
     private val args by navArgs<RunAddFragmentArgs>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        app = activity?.application as MainApp
         setHasOptionsMenu(true)
         setFragmentResultListener("item_to_add") { _, bundle ->
             val content = bundle.getParcelable<Item>("item")

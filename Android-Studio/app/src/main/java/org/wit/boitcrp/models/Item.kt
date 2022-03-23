@@ -17,7 +17,7 @@ data class Item(var itemName: String = "",
 
     @Exclude
     fun GetPickUpResString(slot : Int) : Int {
-        println("String is: " + pickUps?.get(slot)?.getResString() + " Package name: "+BuildConfig.APPLICATION_ID)
+        //println("String is: " + pickUps?.get(slot)?.getResString() + " Package name: "+BuildConfig.APPLICATION_ID)
         return MainApp.instance.resources.getIdentifier(pickUps?.get(slot)?.getResString(),"drawable",BuildConfig.APPLICATION_ID)
     }
 

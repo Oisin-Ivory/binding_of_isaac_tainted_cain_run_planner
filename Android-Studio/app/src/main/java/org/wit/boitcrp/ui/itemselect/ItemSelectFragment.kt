@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.wit.boitcrp.adapters.ItemAdapterSelection
 import org.wit.boitcrp.databinding.FragmentItemSelectBinding
@@ -14,33 +17,22 @@ import org.wit.boitcrp.ui.itemlist.ItemListFragment
 import org.wit.boitcrp.main.MainApp
 import org.wit.boitcrp.models.Item
 import org.wit.boitcrp.models.managers.ItemManager
+import org.wit.boitcrp.ui.item.ItemFragmentViewModel
+import org.wit.boitcrp.ui.itemlist.ItemListViewModel
+import org.wit.boitcrp.ui.runadd.RunAddFragmentArgs
 
 
 class ItemSelectFragment : Fragment() {
-    lateinit var app: MainApp
-    private lateinit var binding: FragmentItemSelectBinding
-    private lateinit var items: List<Item>
     private var remove: Boolean = true
-    private lateinit var displayItems: List<Item>
+    private lateinit var binding: FragmentItemSelectBinding
+    private lateinit var itemSelectViewModel: ItemSelectFragmentViewModel
+    private val args by navArgs<ItemSelectFragmentArgs>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
 
-        val bundle = arguments
-        app = activity?.application as MainApp
-       // println("---------------------------------\nChecking--------------------------------")
-       // println(bundle?.getParcelableArray("item_list"))
-        if(bundle?.getParcelableArray("item_list") == null){
-            //println("---------------------------------\nNo Items Passed--------------------------------")
-            items = ItemManager.findAll()
-            remove = false
-        }else{
-            //println("---------------------------------\nItems Passed---------------------------------")
-            items = bundle.getParcelableArray("item_list")!!.toList() as List<Item>
-            remove = true
-        }
-        displayItems = items
+
     }
 
     override fun onCreateView(
@@ -51,13 +43,20 @@ class ItemSelectFragment : Fragment() {
         binding = FragmentItemSelectBinding.inflate(inflater, container, false)
         val root = binding.root
 
-        app = activity?.application as MainApp
-        binding.recyclerView.setLayoutManager(LinearLayoutManager(activity))
-        if(remove)
-            binding.recyclerView.adapter = ItemAdapterSelection(items, this)
-        else
-            binding.recyclerView.adapter = ItemAdapterSelection(ItemManager.findAll(), this)
+        binding.recyclerView.layoutManager = LinearLayoutManager(activity)
+        itemSelectViewModel = ViewModelProvider(this).get(ItemSelectFragmentViewModel::class.java)
 
+        if(args.itemList == null){
+            itemSelectViewModel.set(ItemManager.findAll())
+            remove = false
+        }else{
+            itemSelectViewModel.set(args.itemList!!.toList())
+            remove = true
+        }
+
+        itemSelectViewModel.observableItemList.observe(viewLifecycleOwner, Observer { items ->
+            items?.let { render(items) }
+        })
         setButtonListener(binding)
         return root
     }
@@ -81,14 +80,14 @@ class ItemSelectFragment : Fragment() {
 
     fun searchTerms(){
         val terms = binding.searchField.text.split(",")
-        displayItems = searchItems(terms)
-        loadItems()
+        //displayItems = searchItems(terms)
+
     }
 
     fun searchItems(searchTerms : List<String>):List<Item>{
         val returnList = emptyList<Item>().toMutableList()
 
-        for (item in items){
+        for (item in itemSelectViewModel.observableItemList.value!!){
             var addToList = true;
             for(term in searchTerms){
                 if(!item.toString().lowercase().contains(term.lowercase())){
@@ -100,15 +99,19 @@ class ItemSelectFragment : Fragment() {
         return returnList
     }
 
-    private fun loadItems() {
-        showItems(displayItems)
+    private fun render(itemList: List<Item>) {
+        binding.recyclerView.adapter = ItemAdapterSelection(itemList, this)
+        if (itemList.isEmpty()) {
+            println("Rendering empty list")
+            binding.recyclerView.visibility = View.GONE
+            //binding.NoItemsImage.visibility = View.VISIBLE
+            //binding.NoItemsText.visibility = View.VISIBLE
+        } else {
+            binding.recyclerView.visibility = View.VISIBLE
+            //binding.NoItemsImage.visibility = View.GONE
+            //binding.NoItemsText.visibility = View.GONE
+        }
     }
-
-    fun showItems (items: List<Item>) {
-        binding.recyclerView.adapter = ItemAdapterSelection(items, this)
-        binding.recyclerView.adapter?.notifyDataSetChanged()
-    }
-
 
 
 
