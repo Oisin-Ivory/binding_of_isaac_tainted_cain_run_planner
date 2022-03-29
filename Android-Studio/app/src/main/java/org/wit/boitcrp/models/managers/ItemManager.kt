@@ -70,9 +70,9 @@ object ItemManager{
         serialize()
     }
 
-    fun delete(item: Item) {
+    fun delete(id: String) {
         for(aitems in items) {
-            if(aitems.id == item.id){
+            if(aitems.id == id){
                 items.remove(aitems)
                 serialize()
                 return

@@ -16,6 +16,9 @@ class ItemListViewModel : ViewModel() {
         load()
     }
 
+    fun delete(id:String){
+        ItemManager.delete(id)
+    }
     fun load() {
         itemList.value = ItemManager.findAll()
     }

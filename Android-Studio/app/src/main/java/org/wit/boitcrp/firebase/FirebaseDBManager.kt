@@ -8,10 +8,27 @@ import org.wit.boitcrp.models.managers.Manager
 
 object FirebaseDBManager : Manager {
 
-        var database: DatabaseReference = FirebaseDatabase.getInstance().reference
+        var database: DatabaseReference = FirebaseDatabase.getInstance("https://boitcrp-default-rtdb.europe-west1.firebasedatabase.app/").reference
 
         override fun findAll(runsList: MutableLiveData<List<Run>>) {
-                TODO("Not yet implemented")
+                database.child("runs")
+                        .addValueEventListener(object : ValueEventListener {
+                                override fun onCancelled(error: DatabaseError) {
+                                }
+
+                                override fun onDataChange(snapshot: DataSnapshot) {
+                                        val localList = ArrayList<Run>()
+                                        val children = snapshot.children
+                                        children.forEach {
+                                                val run = it.getValue(Run::class.java)
+                                                localList.add(run!!)
+                                        }
+                                        database.child("runs")
+                                                .removeEventListener(this)
+
+                                        runsList.value = localList
+                                }
+                        })
         }
 
         override fun findAll(userid: String, runsList: MutableLiveData<List<Run>>) {
@@ -50,6 +67,7 @@ object FirebaseDBManager : Manager {
                 println("Firebase DB Reference : $database")
                 val uid = firebaseUser.value!!.uid
                 val key = database.child("runs").push().key
+                println(key)
                 if (key == null) {
                         println("Firebase Error : Key Empty")
                         return
@@ -60,7 +78,10 @@ object FirebaseDBManager : Manager {
                 val childAdd = HashMap<String, Any>()
                 childAdd["/runs/$key"] = runValues
                 childAdd["/user-runs/$uid/$key"] = runValues
-
+                println(childAdd)
+//                database.child("runs").child(key).setValue(run).addOnCompleteListener{
+//                        println("Added run to firebase")
+//                }
                 database.updateChildren(childAdd)
         }
 

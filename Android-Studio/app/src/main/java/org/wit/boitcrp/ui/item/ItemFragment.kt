@@ -71,18 +71,6 @@ class ItemFragment : Fragment() {
 
     override fun onOptionsItemSelected(mitem: MenuItem): Boolean {
 
-        if(mitem.itemId == R.id.delete_item) {
-            ItemManager.delete(itemFragmentViewModel.observableItem.value!!)
-            val action = ItemFragmentDirections.actionItemFragmentToItemListFragment()
-            findNavController().navigate(action)
-            return super.onOptionsItemSelected(mitem)
-        }
-        if(mitem.itemId == R.id.edit_item) {
-            val action = ItemFragmentDirections.actionItemFragmentToItemAddFragment(args.itemToUse)
-            findNavController().navigate(action)
-            return super.onOptionsItemSelected(mitem)
-        }
-
         return NavigationUI.onNavDestinationSelected(mitem,
             requireView().findNavController()) || super.onOptionsItemSelected(mitem)
     }

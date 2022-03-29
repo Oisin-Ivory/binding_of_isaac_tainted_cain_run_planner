@@ -13,8 +13,8 @@ val gsonBuilder: Gson = GsonBuilder().setPrettyPrinting()
     .registerTypeAdapter(Uri::class.java, UriParser())
     .create()
 
-fun generateRandomId(): Long {
-    return Random().nextLong()
+fun generateRandomId(): String {
+    return UUID.randomUUID().toString()
 }
 
 fun write(context: Context, fileName: String, data: String) {

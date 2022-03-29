@@ -25,4 +25,8 @@
     <style name="Theme.BOITCRP.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.BOITCRP.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
+    <style name="toggleStyle">
+        <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="colorControlHighlight">@color/black</item>
+    </style>
 </resources>

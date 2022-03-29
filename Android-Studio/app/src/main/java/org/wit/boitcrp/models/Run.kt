@@ -23,7 +23,7 @@ data class Run(var uid: String? = "",
         runItems = newRunItems
     }
     @Exclude
-    fun removeItem(id: Long){
+    fun removeItem(id: String){
         val foundItem: Item? = runItems?.find { p -> p.id == id }
         if (foundItem != null) {
             val newRunItems = runItems?.toMutableList()

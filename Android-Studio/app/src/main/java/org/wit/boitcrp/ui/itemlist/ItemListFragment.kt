@@ -1,6 +1,7 @@
 package org.wit.boitcrp.ui.itemlist
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
@@ -21,6 +22,14 @@ import org.wit.boitcrp.databinding.FragmentItemListBinding
 import org.wit.boitcrp.main.MainApp
 import org.wit.boitcrp.models.Item
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.ItemTouchHelper
+import ie.wit.donationx.utils.SwipeToDeleteCallback
+import ie.wit.donationx.utils.SwipeToEditCallback
+import ie.wit.donationx.utils.hideLoader
+import ie.wit.donationx.utils.showLoader
+import org.wit.boitcrp.adapters.RunAdapter
+import org.wit.boitcrp.models.Run
+import org.wit.boitcrp.ui.runlist.RunListFragmentDirections
 
 class ItemListFragment : Fragment(), ItemListener {
     private lateinit var binding: FragmentItemListBinding
@@ -47,6 +56,28 @@ class ItemListFragment : Fragment(), ItemListener {
             items?.let { render(items) }
         })
 
+        val swipeDeleteHandler = object : SwipeToDeleteCallback(requireContext()) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val adapter = binding.recyclerView.adapter as ItemAdapter
+                adapter.removeAt(viewHolder.adapterPosition)
+                itemListViewModel.delete(
+                    (viewHolder.itemView.tag as Item).id!!
+                )
+            }
+        }
+        val itemTouchDeleteHelper = ItemTouchHelper(swipeDeleteHandler)
+        itemTouchDeleteHelper.attachToRecyclerView(binding.recyclerView)
+
+        val swipeEditHandler = object : SwipeToEditCallback(requireContext()) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val action = ItemListFragmentDirections.actionItemListFragmentToItemAddFragment(viewHolder.itemView.tag as Item)
+                findNavController().navigate(action)
+            }
+        }
+        val itemTouchEditHelper = ItemTouchHelper(swipeEditHandler)
+        itemTouchEditHelper.attachToRecyclerView(binding.recyclerView)
+
+
         setButtonListener(binding!!)
         return root
     }
@@ -65,6 +96,7 @@ class ItemListFragment : Fragment(), ItemListener {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_item_list, menu)
+
         super.onCreateOptionsMenu(menu, inflater)
     }
 

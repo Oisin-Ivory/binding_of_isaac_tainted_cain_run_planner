@@ -62,4 +62,6 @@
     <string name="update">Update</string>
     <string name="delete">Delete</string>
     <string name="user_control">User</string>
+    <string name="messageLoading">Loading Runs...</string>
+    <string name="runs_amount_text">Runs</string>
 </resources>

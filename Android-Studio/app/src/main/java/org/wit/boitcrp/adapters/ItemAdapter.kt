@@ -31,8 +31,10 @@ class ItemAdapter(private var items: List<Item>,
     }
 
     fun removeAt(position: Int) {
+        val mutableItems = items.toMutableList()
+        mutableItems.removeAt(position)
 
-        items = mutableListOf(items).removeAt(position);
+        items = mutableItems
         notifyItemRemoved(position)
     }
 
@@ -42,16 +44,18 @@ class ItemAdapter(private var items: List<Item>,
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Item, listener: ItemListener) {
-            binding.itemName.text = item.itemName
-
-            binding.pickupImage1.setImageResource(item.GetPickUpResString(0))
-            binding.pickupImage2.setImageResource(item.GetPickUpResString(1))
-            binding.pickupImage3.setImageResource(item.GetPickUpResString(2))
-            binding.pickupImage4.setImageResource(item.GetPickUpResString(3))
-            binding.pickupImage5.setImageResource(item.GetPickUpResString(4))
-            binding.pickupImage6.setImageResource(item.GetPickUpResString(5))
-            binding.pickupImage7.setImageResource(item.GetPickUpResString(6))
-            binding.pickupImage8.setImageResource(item.GetPickUpResString(7))
+            binding.item = item
+            binding.root.tag = item
+//            binding.itemName.text = item.itemName
+//
+//            binding.pickupImage1.setImageResource(item.GetPickUpResString(0))
+//            binding.pickupImage2.setImageResource(item.GetPickUpResString(1))
+//            binding.pickupImage3.setImageResource(item.GetPickUpResString(2))
+//            binding.pickupImage4.setImageResource(item.GetPickUpResString(3))
+//            binding.pickupImage5.setImageResource(item.GetPickUpResString(4))
+//            binding.pickupImage6.setImageResource(item.GetPickUpResString(5))
+//            binding.pickupImage7.setImageResource(item.GetPickUpResString(6))
+//            binding.pickupImage8.setImageResource(item.GetPickUpResString(7))
 
             binding.root.setOnClickListener { listener.onItemClick(item) }
             binding.executePendingBindings()

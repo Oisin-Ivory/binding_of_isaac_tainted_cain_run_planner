@@ -11,7 +11,7 @@ import org.wit.boitcrp.main.MainApp
 @IgnoreExtraProperties
 @Parcelize
 data class Item(var itemName: String = "",
-                var id: Long = -1,
+                var id: String = "",
                 var pickUps: List<PickUp>? = listOf(PickUp(),PickUp(),PickUp(),PickUp(),PickUp(),PickUp(),PickUp(),PickUp())
 ) : Parcelable {
 

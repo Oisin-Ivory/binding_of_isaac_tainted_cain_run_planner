@@ -50,9 +50,6 @@
             android:name="item_to_use"
             app:argType="org.wit.boitcrp.models.Item" />
         <action
-            android:id="@+id/action_itemFragment_to_itemAddFragment"
-            app:destination="@id/itemAddFragment" />
-        <action
             android:id="@+id/action_itemFragment_to_itemListFragment"
             app:destination="@id/itemListFragment" />
     </fragment>
@@ -94,9 +91,6 @@
         <action
             android:id="@+id/action_runFragment_to_runListFragment"
             app:destination="@id/runListFragment" />
-        <action
-            android:id="@+id/action_runFragment_to_runAddFragment"
-            app:destination="@id/runAddFragment" />
         <action
             android:id="@+id/action_runFragment_to_itemFragment"
             app:destination="@id/itemFragment" />

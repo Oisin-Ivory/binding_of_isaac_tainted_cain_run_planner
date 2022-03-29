@@ -76,22 +76,6 @@ class RunFragment : Fragment() {
 
     override fun onOptionsItemSelected(mitem: MenuItem): Boolean {
 
-        if(mitem.itemId == R.id.delete_run) {
-
-            runFragmentViewModel.deleteRun(
-                loggedInViewModel.liveFirebaseUser.value?.uid!!,
-                runFragmentViewModel.observableRun.value?.uid!!)
-
-            val action = RunFragmentDirections.actionRunFragmentToRunListFragment()
-            findNavController().navigate(action)
-            return super.onOptionsItemSelected(mitem)
-        }
-        if(mitem.itemId == R.id.edit_run) {
-            val action = RunFragmentDirections.actionRunFragmentToRunAddFragment(runFragmentViewModel.observableRun.value!!)
-            findNavController().navigate(action)
-            return super.onOptionsItemSelected(mitem)
-        }
-
         return NavigationUI.onNavDestinationSelected(mitem,
             requireView().findNavController()) || super.onOptionsItemSelected(mitem)
     }

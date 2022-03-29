@@ -1,27 +1,26 @@
-package org.wit.boitcrp.ui.runlist
+package org.wit.boitcrp.ui.mainmenu
 
-import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseUser
 import org.wit.boitcrp.firebase.FirebaseDBManager
+import org.wit.boitcrp.models.Item
 import org.wit.boitcrp.models.Run
+import org.wit.boitcrp.models.managers.ItemManager
 import java.lang.Exception
 
-//import org.wit.boitcrp.models.managers.RunManager
-
-class RunListFragmentViewModel : ViewModel() {
+class MainMenuFragmentViewModel : ViewModel() {
 
     private val runs = MutableLiveData<List<Run>>()
+
+    var runCount : String = ""
+    var itemCount : String = ""
 
     val observableRunList: LiveData<List<Run>>
         get() = runs
 
     var liveFirebaseUser = MutableLiveData<FirebaseUser>()
-
-    var readOnly = MutableLiveData(false)
 
     init {
         load()
@@ -30,36 +29,21 @@ class RunListFragmentViewModel : ViewModel() {
     fun load() {
         try {
             //DonationManager.findAll(liveFirebaseUser.value?.email!!, donationsList)
-            readOnly.value = false
             println("---------------------------------------------------\n"+liveFirebaseUser.value?.uid!!)
             FirebaseDBManager.findAll(liveFirebaseUser.value?.uid!!,
                 runs)
             println("Report Load Success : ${runs.value.toString()}")
-        }
-        catch (e: Exception) {
-            println("Report Load Error : $e.message")
-        }
-    }
-    fun loadAll() {
-        try {
-            //DonationManager.findAll(liveFirebaseUser.value?.email!!, donationsList)
-            readOnly.value = true
-            FirebaseDBManager.findAll(
-                runs)
-            println("Report Load Success : ${runs.value.toString()}")
+            runCount = runs.value?.size.toString()
+            itemCount = ItemManager.findAll().size.toString()
         }
         catch (e: Exception) {
             println("Report Load Error : $e.message")
         }
     }
 
-    fun delete(userid: String, id: String) {
-        try {
-            FirebaseDBManager.delete(userid,id)
-        }
-        catch (e: Exception) {
-            println("Report Delete Error : $e.message")
-        }
-    }
 
 }
+
+
+//FirebaseDBManager.findAll(liveFirebaseUser.value?.uid!!,
+//runs)
