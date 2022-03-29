@@ -31,8 +31,10 @@ class ItemAdapter(private var items: List<Item>,
     }
 
     fun removeAt(position: Int) {
+        val mutableItems = items.toMutableList()
+        mutableItems.removeAt(position)
 
-        items = mutableListOf(items).removeAt(position);
+        items = mutableItems
         notifyItemRemoved(position)
     }
 
@@ -43,6 +45,7 @@ class ItemAdapter(private var items: List<Item>,
 
         fun bind(item: Item, listener: ItemListener) {
             binding.item = item
+            binding.root.tag = item
 //            binding.itemName.text = item.itemName
 //
 //            binding.pickupImage1.setImageResource(item.GetPickUpResString(0))
