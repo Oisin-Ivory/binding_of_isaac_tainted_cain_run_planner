@@ -113,6 +113,11 @@ class ItemListFragment : Fragment(), ItemListener {
     }
 
     private fun render(itemList: List<Item>) {
+        println("_____________________________RENDERING_________________________________")
+        for (item in itemList){
+            println(item.itemName)
+        }
+        println("_______________________________________________________________________")
         binding.recyclerView.adapter = ItemAdapter(itemList, this)
         if (itemList.isEmpty()) {
             println("Rendering empty list")
@@ -124,6 +129,7 @@ class ItemListFragment : Fragment(), ItemListener {
             binding.NoItemsImage.visibility = View.GONE
             binding.NoItemsText.visibility = View.GONE
         }
+        
     }
 
 
