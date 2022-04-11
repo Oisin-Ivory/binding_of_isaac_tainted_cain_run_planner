@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "507445462125",
+    "firebase_url": "https://boitcrp-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "boitcrp",
     "storage_bucket": "boitcrp.appspot.com"
   },

@@ -12,7 +12,7 @@ import java.lang.Exception
 
 abstract class SwipeToEditCallback(context: Context) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
 
-    private val editIcon = ContextCompat.getDrawable(context, R.drawable.goldheart)
+    private val editIcon = ContextCompat.getDrawable(context, R.drawable.completion_cathedral_hard)
     private val intrinsicWidth = editIcon?.intrinsicWidth
     private val intrinsicHeight = editIcon?.intrinsicHeight
     private val background = ColorDrawable()
@@ -63,10 +63,9 @@ abstract class SwipeToEditCallback(context: Context) : ItemTouchHelper.SimpleCal
         // Calculate position of Edit icon
         val editIconTop = itemView.top + (itemHeight - intrinsicHeight!!) / 2
         val editIconMargin = (itemHeight - intrinsicHeight) / 2
-        val editIconLeft = itemView.right - editIconMargin - intrinsicWidth!! - 810
-        val editIconRight = itemView.right - editIconMargin - 810
+        val editIconLeft = itemView.left - editIconMargin - intrinsicWidth!! + 125
+        val editIconRight = itemView.left + editIconMargin + 64
         val editIconBottom = editIconTop + intrinsicHeight
-
         // Draw the edit icon
         editIcon?.setBounds(editIconLeft, editIconTop, editIconRight, editIconBottom)
         editIcon?.draw(c)

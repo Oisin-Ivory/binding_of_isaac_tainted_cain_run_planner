@@ -16,7 +16,7 @@
 
     <item
         android:id="@+id/toggleRuns"
-        android:title=""
+        android:title="@string/run_list_type"
         app:actionLayout="@layout/togglebutton_layout"
         app:showAsAction="always" />
 </menu>

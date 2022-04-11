@@ -22,4 +22,7 @@ class ItemListViewModel : ViewModel() {
     fun load() {
         itemList.value = ItemManager.findAll()
     }
+    fun setItems(items:List<Item>) {
+        itemList.value = items
+    }
 }

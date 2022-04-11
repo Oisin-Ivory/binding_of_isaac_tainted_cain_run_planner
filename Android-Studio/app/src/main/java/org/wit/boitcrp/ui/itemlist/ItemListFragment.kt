@@ -29,6 +29,7 @@ import ie.wit.donationx.utils.hideLoader
 import ie.wit.donationx.utils.showLoader
 import org.wit.boitcrp.adapters.RunAdapter
 import org.wit.boitcrp.models.Run
+import org.wit.boitcrp.models.managers.ItemManager
 import org.wit.boitcrp.ui.runlist.RunListFragmentDirections
 
 class ItemListFragment : Fragment(), ItemListener {
@@ -84,15 +85,14 @@ class ItemListFragment : Fragment(), ItemListener {
 
     fun setButtonListener(layout: FragmentItemListBinding) {
         layout.searchbtn.setOnClickListener {
-            //searchTerms()
+            searchTerms()
         }
     }
 
-//    fun searchTerms(){
-//        val terms = binding.searchField.text.split(",")
-//        displayItems = app.items.searchItems(terms)
-//        loadItems()
-//    }
+    fun searchTerms(){
+        val terms = binding.searchField.text.split(",")
+        itemListViewModel.setItems(ItemManager.searchItems(terms))
+    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_item_list, menu)

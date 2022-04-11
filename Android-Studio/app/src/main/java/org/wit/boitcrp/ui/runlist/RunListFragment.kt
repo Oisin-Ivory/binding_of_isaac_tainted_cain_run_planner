@@ -100,17 +100,34 @@ class RunListFragment : Fragment(), RunListener {
         itemTouchEditHelper.attachToRecyclerView(binding.recyclerView)
 
 
-        binding.searchbtn.setOnClickListener(){
-            //searchRuns()
+        binding.searchbtn.setOnClickListener{
+            searchRuns()
         }
         return root
     }
 
-//    fun searchRuns(){
-//        val terms = binding.searchField.text.split(",")
-//        val displayItems = app.runs.searchRuns(terms)
-//        showRuns(displayItems)
-//    }
+    fun searchRuns(){
+        val terms = binding.searchField.text.split(",")
+        runListViewModel.setRuns(searchRuns(terms));
+    }
+
+    fun searchRuns(searchTerms : List<String>):List<Run>{
+
+        val runs = runListViewModel.observableRunList.value
+
+        val returnList = emptyList<Run>().toMutableList()
+
+        for (run in runs!!){
+            var addToList = true;
+            for(term in searchTerms){
+                if(!run.toString().lowercase().contains(term.lowercase())){
+                    addToList = false
+                }
+            }
+            if(addToList) returnList.add(run)
+        }
+        return returnList
+    }
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 
         inflater.inflate(R.menu.menu_run_list, menu)

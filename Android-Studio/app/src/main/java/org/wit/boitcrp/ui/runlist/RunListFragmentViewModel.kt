@@ -53,6 +53,10 @@ class RunListFragmentViewModel : ViewModel() {
         }
     }
 
+    fun setRuns(runsToDisplay:List<Run>){
+        runs.value = runsToDisplay
+    }
+
     fun delete(userid: String, id: String) {
         try {
             FirebaseDBManager.delete(userid,id)
