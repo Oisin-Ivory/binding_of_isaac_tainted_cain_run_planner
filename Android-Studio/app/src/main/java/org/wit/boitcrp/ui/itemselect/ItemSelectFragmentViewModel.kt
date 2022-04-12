@@ -14,7 +14,7 @@ class ItemSelectFragmentViewModel: ViewModel() {
         get() = itemList
 
 
-    fun set(displayItemList:List<Item>) {
-        itemList.value = displayItemList
+    fun setItems(items:List<Item>) {
+        itemList.value = items
     }
 }

@@ -38,6 +38,21 @@ object ItemManager{
         return returnList
     }
 
+    fun searchItems(searchTerms : List<String>,listToSearch: List<Item>):List<Item>{
+        val returnList = emptyList<Item>().toMutableList()
+
+        for (item in listToSearch){
+            var addToList = true;
+            for(term in searchTerms){
+                if(!item.toString().lowercase().contains(term.lowercase())){
+                    addToList = false
+                }
+            }
+            if(addToList) returnList.add(item)
+        }
+        return returnList
+    }
+
 
     private fun serialize() {
         val jsonString = gsonBuilder.toJson(items, listType)

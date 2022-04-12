@@ -47,10 +47,10 @@ class ItemSelectFragment : Fragment() {
         itemSelectViewModel = ViewModelProvider(this).get(ItemSelectFragmentViewModel::class.java)
 
         if(args.itemList == null){
-            itemSelectViewModel.set(ItemManager.findAll())
+            itemSelectViewModel.setItems(ItemManager.findAll())
             remove = false
         }else{
-            itemSelectViewModel.set(args.itemList!!.toList())
+            itemSelectViewModel.setItems(args.itemList!!.toList())
             remove = true
         }
 
@@ -80,8 +80,10 @@ class ItemSelectFragment : Fragment() {
 
     fun searchTerms(){
         val terms = binding.searchField.text.split(",")
-        //displayItems = searchItems(terms)
-
+        if(remove)
+            itemSelectViewModel.setItems(ItemManager.searchItems(terms,args.itemList!!.toMutableList()))
+        else
+            itemSelectViewModel.setItems(ItemManager.searchItems(terms))
     }
 
     fun searchItems(searchTerms : List<String>):List<Item>{
