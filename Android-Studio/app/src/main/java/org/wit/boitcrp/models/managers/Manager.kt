@@ -5,6 +5,10 @@ import com.google.firebase.auth.FirebaseUser
 import org.wit.boitcrp.models.Run
 
 interface Manager {
+    fun findFavourites(userid:String,
+                       runsList:
+                       MutableLiveData<List<Run>>)
+
     fun findAll(runsList:
                 MutableLiveData<List<Run>>)
 
@@ -21,4 +25,5 @@ interface Manager {
     fun update(userid:String, runid: String,run: Run)
 
     fun delete(userid:String, runid: String)
+
 }

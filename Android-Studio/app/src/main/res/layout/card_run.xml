@@ -26,15 +26,15 @@
 
             <TextView
                 android:id="@+id/runName"
-                android:layout_width="186dp"
+                android:layout_width="155dp"
                 android:layout_height="64dp"
+                android:fontFamily="@font/upheavtt"
                 android:gravity="center_vertical"
                 android:textSize="20sp"
-                android:fontFamily="@font/upheavtt"
                 tools:text='@{run.runName ?? "null"}' />
 
             <LinearLayout
-                android:layout_width="187dp"
+                android:layout_width="140dp"
                 android:layout_height="64dp"
                 android:orientation="vertical">
 
@@ -44,8 +44,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:fontFamily="@font/upheavtt"
-                    tools:text='@{run.runItems.get(0).itemName ?? ""}'
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:text='@{run.runItems.size() > 0 ? run.runItems.get(0).itemName : ""}' />
 
                 <TextView
                     android:id="@+id/runItem1"
@@ -53,8 +53,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:fontFamily="@font/upheavtt"
-                    tools:text='@{run.runItems.get(1).itemName ?? ""}'
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:text='@{run.runItems.size() > 1? run.runItems.get(1).itemName : ""}' />
 
                 <TextView
                     android:id="@+id/runItem2"
@@ -62,9 +62,16 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:fontFamily="@font/upheavtt"
-                    tools:text='@{run.runItems.get(2).itemName ?? ""}'
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:text='@{run.runItems.size() > 2 ? run.runItems.get(2).itemName : ""}' />
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/favourite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/completion_bossrush" />
         </LinearLayout>
 
     </RelativeLayout>

@@ -66,12 +66,21 @@
 
         </LinearLayout>
 
+        <Spinner
+            android:id="@+id/displayRunType"
+            android:layout_width="157dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="16dp"
+            android:contentDescription="@string/run_list_type"
+            android:outlineAmbientShadowColor="@color/colorFontDark"
+            android:outlineSpotShadowColor="@color/colorPrimaryDark" />
+
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swiperefresh"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="605dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

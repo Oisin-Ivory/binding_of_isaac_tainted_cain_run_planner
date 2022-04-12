@@ -14,9 +14,4 @@
         android:title="@string/menu_addItem"
         app:showAsAction="ifRoom" />
 
-    <item
-        android:id="@+id/toggleRuns"
-        android:title="@string/run_list_type"
-        app:actionLayout="@layout/togglebutton_layout"
-        app:showAsAction="always" />
 </menu>

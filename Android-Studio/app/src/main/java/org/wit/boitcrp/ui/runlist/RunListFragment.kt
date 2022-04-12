@@ -1,13 +1,16 @@
 package org.wit.boitcrp.ui.runlist
 
+//import org.wit.boitcrp.models.managers.RunManager
+
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.activity.result.ActivityResultLauncher
-import androidx.fragment.app.Fragment
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.SwitchCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,18 +22,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ie.wit.donationx.utils.*
 import org.wit.boitcrp.R
-import org.wit.boitcrp.adapters.ItemAdapter
 import org.wit.boitcrp.adapters.RunAdapter
 import org.wit.boitcrp.adapters.RunListener
 import org.wit.boitcrp.databinding.FragmentRunListBinding
-import org.wit.boitcrp.ui.itemlist.ItemListFragment
 import org.wit.boitcrp.main.MainApp
-import org.wit.boitcrp.models.Item
 import org.wit.boitcrp.models.Run
 import org.wit.boitcrp.ui.auth.LoggedInViewModel
-//import org.wit.boitcrp.models.managers.RunManager
-import org.wit.boitcrp.ui.itemlist.ItemListViewModel
-import org.wit.boitcrp.ui.run.RunFragmentDirections
+import org.wit.boitcrp.ui.itemlist.ItemListFragment
+
 
 class RunListFragment : Fragment(), RunListener {
     lateinit var app: MainApp
@@ -40,6 +39,7 @@ class RunListFragment : Fragment(), RunListener {
     lateinit var loader : AlertDialog
     private val loggedInViewModel : LoggedInViewModel by activityViewModels()
 
+    val paths = arrayOf("My Runs","All Runs", "Favourites")
     //private lateinit var displayRuns: List<Run>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,10 +58,12 @@ class RunListFragment : Fragment(), RunListener {
         activity?.title = "Runs"
         loader = createLoader(requireActivity())
 
+        runListViewModel = ViewModelProvider(this).get(RunListFragmentViewModel::class.java)
+        runListViewModel.loadAll()
+
         //displayRuns = app.runs.findAll()
         binding.recyclerView.setLayoutManager(LinearLayoutManager(activity))
 
-        runListViewModel = ViewModelProvider(this).get(RunListFragmentViewModel::class.java)
         runListViewModel.observableRunList.observe(viewLifecycleOwner, Observer {
                 runs ->
             runs?.let { render(runs)
@@ -69,6 +71,32 @@ class RunListFragment : Fragment(), RunListener {
             checkSwipeRefresh()
             }
         })
+
+        val spinner = binding.displayRunType
+
+        val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
+            app.appContext, R.layout.spinner_style, paths
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.setAdapter(adapter)
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                if(spinner.selectedItem == "All Runs"){
+                    runListViewModel.loadAll()
+                }else if (spinner.selectedItem == "My Runs"){
+                    runListViewModel.load()
+                }else{
+                    runListViewModel.loadFavourites()
+                }
+            }
+
+        }
+
         //loadRuns()
         //registerRefreshCallback()
 
@@ -132,14 +160,6 @@ class RunListFragment : Fragment(), RunListener {
 
         inflater.inflate(R.menu.menu_run_list, menu)
 
-        val item = menu.findItem(R.id.toggleRuns) as MenuItem
-        item.setActionView(R.layout.togglebutton_layout)
-        val toggleDonations: SwitchCompat = item.actionView.findViewById(R.id.toggleButton)
-        toggleDonations.isChecked = false
-        toggleDonations.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked) runListViewModel.loadAll()
-            else runListViewModel.load()
-        }
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -174,6 +194,10 @@ class RunListFragment : Fragment(), RunListener {
         findNavController().navigate(action)
     }
 
+    override fun onRunFav(run: Run) {
+        runListViewModel.favourite(run)
+    }
+
 //    private fun registerRefreshCallback() {
 //        refreshIntentLauncher =
 //            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
@@ -190,7 +214,13 @@ class RunListFragment : Fragment(), RunListener {
 //    }
 
     private fun render(runList: List<Run>){
-        binding.recyclerView.adapter = RunAdapter(runList, this,runListViewModel.readOnly.value!!)
+        if(runListViewModel.liveFirebaseUser.value==null){
+            return
+        }
+        println("____________runList______________\n"+runList)
+        println(runListViewModel.readOnly.value)
+        println(runListViewModel.liveFirebaseUser.value!!.uid)
+        binding.recyclerView.adapter = RunAdapter(runList, this,runListViewModel.readOnly.value!!,runListViewModel.liveFirebaseUser.value!!.uid)
         if(runList.isEmpty()){
             println("Rendering empty list")
             binding.recyclerView.visibility = View.GONE

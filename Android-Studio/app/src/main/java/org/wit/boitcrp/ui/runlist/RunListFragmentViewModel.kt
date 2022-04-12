@@ -16,6 +16,8 @@ class RunListFragmentViewModel : ViewModel() {
 
     private val runs = MutableLiveData<List<Run>>()
 
+    private val favouriteRuns = MutableLiveData<List<Run>>()
+
     val observableRunList: LiveData<List<Run>>
         get() = runs
 
@@ -24,14 +26,13 @@ class RunListFragmentViewModel : ViewModel() {
     var readOnly = MutableLiveData(false)
 
     init {
-        load()
+        loadAll()
     }
 
     fun load() {
         try {
-            //DonationManager.findAll(liveFirebaseUser.value?.email!!, donationsList)
             readOnly.value = false
-            println("---------------------------------------------------\n"+liveFirebaseUser.value?.uid!!)
+            println("-------------------FirebaseUser-------------------\n"+liveFirebaseUser.value?.uid!!)
             FirebaseDBManager.findAll(liveFirebaseUser.value?.uid!!,
                 runs)
             println("Report Load Success : ${runs.value.toString()}")
@@ -40,6 +41,21 @@ class RunListFragmentViewModel : ViewModel() {
             println("Report Load Error : $e.message")
         }
     }
+
+    fun loadFavourites() {
+        try {
+            //DonationManager.findAll(liveFirebaseUser.value?.email!!, donationsList)
+            readOnly.value = false
+            println("---------------------------------------------------\n"+liveFirebaseUser.value?.uid!!)
+            FirebaseDBManager.findFavourites(liveFirebaseUser.value?.uid!!,
+                runs)
+            println("Report Load Success : ${runs.value.toString()}")
+        }
+        catch (e: Exception) {
+            println("Report Load Error : $e.message")
+        }
+    }
+
     fun loadAll() {
         try {
             //DonationManager.findAll(liveFirebaseUser.value?.email!!, donationsList)
@@ -49,6 +65,15 @@ class RunListFragmentViewModel : ViewModel() {
             println("Report Load Success : ${runs.value.toString()}")
         }
         catch (e: Exception) {
+            println("Report Load Error : $e.message")
+        }
+    }
+
+    fun favourite(run: Run){
+        try{
+            FirebaseDBManager.favourite(liveFirebaseUser.value!!.uid,run)
+
+        }catch (e: Exception) {
             println("Report Load Error : $e.message")
         }
     }
