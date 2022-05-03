@@ -71,6 +71,7 @@ Items are stored locally on the device, as they are a per run basis very few run
 <br>
 <br>
 When creating an item, the user must enter an item name, they select the 8 pickups using a list of spinners which contain all the pickups. The pickups are stored in a JSON file, which is created automatically on the app startup if the file doesn't already exist. Finally they press create item which saves the item on the device. Editing an item will bring them to this fragment as well, however the fields will already be filled out, the user can then change what they please before updating it.
+
 ### Runs
 Runs are not stored locally, but instead stored on a real-time database on Firebase. When pressing on runs, the user is brought to a list of runs, and features some extra options when compared to items. They can view all runs, their runs or their favourite runs. The runs have similar traits to items, where the user can swipe to edit/delete and create a new run, but now they also have the option to favourite using the star icon, doing so will add the run to the users favorites.
 
