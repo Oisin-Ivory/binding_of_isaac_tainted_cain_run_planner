@@ -18,7 +18,17 @@ When launching the app, users are prompted to create an account, alternatively t
 <img src=".public/home.png" width="150" align="left">
 <img src=".public/navmenu.png" width="150" align="left">
 </div>
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 ### Items
 Items are stored locally on the device, as they are a per run basis very few runs will have the same combination of items. When visiting items the user is presented with the list of items currently on the device. They can create a new items by pressing the + on the menu, or they can delete/edit an item by either swiping the item left/right. To get a clearer view of the item, they can also press on the item, bringing them to another fragment where it is just the item name and the pickups.
 <div style="width:100%">
