@@ -46,6 +46,7 @@ Items are stored locally on the device, as they are a per run basis very few run
 <img src=".public/delete.png" width="250" align="left">
 <img src=".public/edit.png" width="250" align="left">
 <img src=".public/item.png" width="250" align="left">
+<img src=".public/editingitem.png" width="250" align="left">
 </div>
 <br>
 <br>
