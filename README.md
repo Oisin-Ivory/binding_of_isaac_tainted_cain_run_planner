@@ -12,11 +12,11 @@ This app is for the game [Binding of Isaac: Rebirth](https://store.steampowered.
 The items recipes are seeded during the start of the run, so inputting the same seed will result in the same recipes. This app allows users to share their runs with others, where a run is a collection of items, and each item is a collection of 8 pickups.
 ### Signing In
 When launching the app, users are prompted to create an account, alternatively they can also sign in using Google Authentication. All the user accounts are manged using Firebase Authentication. Once they are signed in they are greeted with some statistics, such as how many runs and items they've created. They can then access the side navigation menu where they can return to home, create items, runs, view the about section or sign out.
-
+<p>
 <img src=".public/loginscreen.png" width="33%" align="left">
 <img src=".public/home.png" width="33%" align="left">
 <img src=".public/navmenu.png" width="33%" align="left">
-
+</p>
 ### Items
 Items are stored locally on the device, as they are a per run basis very few runs will have the same combination of items. When visiting items the user is presented with the list of items currently on the device. They can create a new items by pressing the + on the menu, or they can delete/edit an item by either swiping the item left/right. To get a clearer view of the item, they can also press on the item, bringing them to another fragment where it is just the item name and the pickups.
 
