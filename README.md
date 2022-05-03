@@ -13,7 +13,7 @@ The items recipes are seeded during the start of the run, so inputting the same 
 ### Signing In
 When launching the app, users are prompted to create an account, alternatively they can also sign in using Google Authentication. All the user accounts are manged using Firebase Authentication. Once they are signed in they are greeted with some statistics, such as how many runs and items they've created. They can then access the side navigation menu where they can return to home, create items, runs, view the about section or sign out.
 
-
+<img src=".public/loginscreen.png" width="100">
 ![Login Screen](.public/loginscreen.png | width=100)
 ![Home Screen](.public/home.png | width=100)
 ![Nav Menu](.public/navmenu.png | width=100)
